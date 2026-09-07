@@ -3,9 +3,11 @@ import {
   Sigma,
   Network,
   FlaskConical,
+  UserRound,
   GraduationCap,
   BookOpen,
   FolderOpen,
+  Link2,
 } from "lucide-react"
 
 import {
@@ -26,6 +28,19 @@ const mainItems = [
     url: "/",
     icon: Home,
   },
+
+  {
+    title: "Personal Information",
+    url: "/personal",
+    icon: UserRound,
+  },
+
+  {
+    title: "Favourite Links",
+    url: "/links",
+    icon: Link2,
+  },
+
   //{
   //   title: "Mathematics",
   //   url: "/mathematics",
@@ -36,14 +51,15 @@ const mainItems = [
   //   url: "/computer-science",
   //   icon: Network,
   //},
+]
+
+const workspaceItems = [
+
   {
     title: "Research",
     url: "/research",
     icon: FlaskConical,
   },
-]
-
-const workspaceItems = [
   {
     title: "Teaching",
     url: "/teaching",
