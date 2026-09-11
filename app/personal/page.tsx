@@ -395,7 +395,7 @@ export default function PersonalPage() {
                 Personal Register
               </span>
 
-              <span className="h-1 w-1 rounded-full bg-blue-400/40" />
+              <span className="status-dot h-2 w-2 rounded-full bg-blue-400" />
 
               <span className="text-sm text-slate-400">
                 The person behind the work

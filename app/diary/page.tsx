@@ -19,6 +19,7 @@ type Domain =
   | "Theoretical Computer Science"
   | "Research"
   | "Teaching"
+  | "Slice of Life"
 
 type Status =
   | "Ongoing"
@@ -149,12 +150,12 @@ const entries: DiaryEntry[] = [
 
   {
     number: "011",
-    date: "23 · VIII · 1806",
+    date: "7 · IX · 1806",
     day: "Monday",
     title:
-      "Teaching as a test of understanding",
-    domain: "Teaching",
-    subject: "Algorithms · C",
+      "The selfsame ornage tinge doth bestow the selfsame warmth!",
+    domain: "Slice of Life",
+    subject: "",
     excerpt:
       "That which cannot be rendered intelligible to another mind hath perhaps not yet become intelligible to one's own.",
     observation:
@@ -1369,17 +1370,20 @@ export default function DiaryPage() {
 
             </section>
 
-            {/* =================================================
-                CLOSING
+{/* =================================================
+                CLOSING REGISTER
                 ================================================= */}
 
             <section className="mt-28 md:mt-36">
 
               <div
                 className="
-                  border-t
+                  border-y
                   border-white/[0.08]
-                  py-12
+                  bg-[#11151b]
+                  px-7
+                  py-10
+                  md:px-10
                 "
               >
 
@@ -1387,7 +1391,7 @@ export default function DiaryPage() {
                   className="
                     flex
                     flex-col
-                    gap-6
+                    gap-8
                     md:flex-row
                     md:items-end
                     md:justify-between
@@ -1396,42 +1400,69 @@ export default function DiaryPage() {
 
                   <div>
 
-                    <p
+                    <Label>
+                      Closing register
+                    </Label>
+
+
+                    <h3
                       className="
+                        mt-5
+                        max-w-2xl
                         font-serif
-                        text-2xl
-                        text-zinc-200
+                        text-3xl
+                        leading-tight
+                        text-white
+                        md:text-4xl
                       "
                     >
-                      The record continueth.
-                    </p>
+                      The work remaineth open.
+                    </h3>
+
 
                     <p
                       className="
-                        mt-3
+                        mt-4
+                        max-w-2xl
                         font-serif
-                        text-sm
+                        text-[15px]
                         italic
+                        leading-7
                         text-zinc-500
                       "
                     >
-                      What remaineth unresolved is not thereby
-                      without value.
+                      What is unresolved is not thereby without
+                      value; it is merely awaiting another attempt.
                     </p>
 
                   </div>
 
-                  <span
+
+                  <div
                     className="
-                      font-mono
-                      text-[9px]
-                      uppercase
-                      tracking-[0.25em]
-                      text-blue-300/35
+                      flex
+                      items-center
+                      gap-4
                     "
                   >
-                    JADE · DIARY · 1806
-                  </span>
+
+                    <NumberCircle>
+                      ω
+                    </NumberCircle>
+
+                    <span
+                      className="
+                        font-mono
+                        text-[9px]
+                        uppercase
+                        tracking-[0.22em]
+                        text-zinc-600
+                      "
+                    >
+                      Record continues
+                    </span>
+
+                  </div>
 
                 </div>
 

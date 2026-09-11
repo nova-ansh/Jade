@@ -95,3 +95,23 @@
     @apply font-sans;
   }
 }
+
+@keyframes status-dot-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.75);
+    box-shadow: 0 0 0 rgba(96, 165, 250, 0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+    box-shadow: 0 0 12px rgba(96, 165, 250, 0.65);
+  }
+}
+
+.status-dot {
+  animation: status-dot-breathe 3s ease-in-out infinite;
+  transform-origin: center;
+}

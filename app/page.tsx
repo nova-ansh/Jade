@@ -94,7 +94,9 @@ export default function Home() {
 
   return (
 
-    <SidebarProvider>
+    <>
+
+      <SidebarProvider>
 
       {/* ======================================================
           EXISTING JADE SIDEBAR
@@ -210,7 +212,7 @@ export default function Home() {
                 Present inquiry
               </span>
 
-              <span className="h-1 w-1 rounded-full bg-blue-400/40" />
+              <span className="status-dot h-2 w-2 rounded-full bg-blue-400" />
 
               <span
                 className="
@@ -250,7 +252,7 @@ export default function Home() {
                 className="
                   font-serif
                   text-xl
-                  text-blue-300/40
+                  text-blue-400/40
                 "
               >
                 φ
@@ -881,16 +883,16 @@ export default function Home() {
               >
 
                 <SymposionDay
-                  number="Week 35 · Day 01"
+                  number="Week 37 · Day 01"
                   title="Saturday, 29 August, 2026"
                   speaker="Jade"
-                  topics="C Programming, Class II"
-                  symbol="01"
+                  topics="C Programming, Class IV"
+                  symbol="29th August, 2026"
                 />
 
 
                 <SymposionDay
-                  number="Week 35 · Day 02"
+                  number="Week 37 · Day 02"
                   title="Sunday, 30 August, 2026"
                   speaker="Jade"
                   topics="Axiomatic Set Theory"
@@ -899,7 +901,7 @@ export default function Home() {
 
 
                 <SymposionDay
-                  number="Week 35 · Day 03"
+                  number="Week 37 · Day 03"
                   title="Monday, 31 August, 2026"
                   speaker="Jade"
                   topics="Computer Networks"
@@ -936,25 +938,26 @@ export default function Home() {
 
                 <Interest
                   number="01"
-                  title="Algorithmics"
-                  description="Algorithms, data structures, complexity, and the craft of making a procedure precise."
-                  mark="A"
+                  title="Discrete and Probabilistic Structures"
+                  description="Logic Theory; Counting Theory; Graph Theory; Group Theory; 
+                               Lattice Theory; Axiomatic Set Theory; Bayesian Inference; Randomness; Measure Theory. "
+                  mark="ℵ"
                 />
 
 
                 <Interest
                   number="02"
-                  title="Theoretical Computer Science"
-                  description="Formal languages, computation, logic, automata, discrete mathematics, and the structures beneath computation."
-                  mark="T"
+                  title="Automata, Computational & Complexity Theory"
+                  description="Formal Languages; Computability Theory; Reducability; Complexity Theory. "
+                  mark="⊨"
                 />
 
 
                 <Interest
                   number="03"
-                  title="System Subjects"
-                  description="Computer networks, operating systems, architecture, and the machinery by which abstract ideas become working systems."
-                  mark="S"
+                  title="Algorithmics"
+                  description="Graph-theoretic Algorithms; Randomized Algorithms; Probabilistic Algorithms."
+                  mark="Ω"
                 />
 
               </div>
@@ -989,7 +992,7 @@ export default function Home() {
                   number="01"
                   title="Graph families"
                   description="Constructing and examining structured families of graphs, their connectivity, planarity, Hamiltonicity, and the behaviour forced by local constraints."
-                  tag="Graph Theory"
+                  tag=""
                   mark="G"
                 />
 
@@ -998,7 +1001,7 @@ export default function Home() {
                   number="02"
                   title="Foundations of computation"
                   description="Notes connecting algorithms, formal languages, logic, programming, and the mathematical ideas that sit beneath computation."
-                  tag="Theory"
+                  tag=""
                   mark="λ"
                 />
 
@@ -1024,6 +1027,13 @@ export default function Home() {
               <div className="mt-8 space-y-5">
 
                 <Work
+                  number="03"
+                  title="Teaching"
+                  type="Academia"
+                  description="I conduct Symposion - a lecture series on weekends at TSLAS (Thapar School of Liberal Arts & Sciences), TIET Patiala, Patiala, India."
+                />
+              
+                <Work
                   number="01"
                   title="Cohesive Ring Planar Graphs"
                   type="Graph Theory"
@@ -1036,14 +1046,6 @@ export default function Home() {
                   title="Mathematical Notes"
                   type="Foundations"
                   description="Proofs, constructions, questions, counterexamples, and things worth understanding properly."
-                />
-
-
-                <Work
-                  number="03"
-                  title="Teaching"
-                  type="Education"
-                  description="Lectures and explanations across mathematics and computer science, built around intuition and first principles."
                 />
 
               </div>
@@ -1129,7 +1131,7 @@ export default function Home() {
                   >
 
                     <NumberCircle>
-                      ∴
+                      ω
                     </NumberCircle>
 
                     <span
@@ -1250,6 +1252,7 @@ export default function Home() {
       </main>
 
     </SidebarProvider>
+    </>
   )
 }
 
