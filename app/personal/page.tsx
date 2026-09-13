@@ -5,7 +5,6 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-import { IndiaMap } from "@/components/india-map/IndiaMap"
 import { AppSidebar } from "@/components/app-sidebar"
 
 import {
@@ -28,6 +27,13 @@ import { useMemo, useState } from "react"
    A quieter record of the person behind the work.
    ============================================================ */
 
+type PersonalDetail = {
+  label: string
+  value: string
+  icon: React.ReactNode
+  href?: string
+}
+
 type GalleryItem = {
   id: number
   title: string
@@ -46,17 +52,11 @@ type Hobby = {
   icon: React.ReactNode
 }
 
-type VisitedPlace = {
-  state: string
-  code: string
-  visited: boolean
-}
-
 /* ============================================================
    PERSONAL DATA
    ============================================================ */
 
-const personalDetails = [
+const personalDetails: PersonalDetail[] = [
   {
     label: "Name",
     value: "Jade",
@@ -79,13 +79,25 @@ const personalDetails = [
   },
   {
     label: "Email",
-    value: "anshdeepsingh42 rate outlook dot com",
+    value: " asingh25_be23 AT thapar DOT edu",
     icon: <Mail className="h-4 w-4" />,
   },
   {
     label: "Location",
     value: "Patiala, Punjab, India",
     icon: <MapPin className="h-4 w-4" />,
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/ansh-deep-singh-66165a286",
+    icon: <Globe2 className="h-4 w-4" />,
+    href: "linkedin.com/in/ansh-deep-singh-66165a286",
+  },
+  {
+    label: "Website",
+    value: "https://pj-mask.vercel.app/",
+    icon: <Globe2 className="h-4 w-4" />,
+    href: "https://pj-mask.vercel.app/",
   },
 ]
 
@@ -97,38 +109,38 @@ const hobbies: Hobby[] = [
   {
     title: "Mathematics",
     description:
-      "Exploring mathematical structures, proofs, infinite processes, and the ideas that sit beneath computation.",
-    image: "/personal/hobbies/mathematics.jpg",
+      "Stack from the Nava Nalanda Central Library (Nava Library), TIET-Patiala.",
+    image: "NNCL.jpeg",
     icon: <BookOpen className="h-4 w-4" />,
   },
   {
-    title: "Programming",
+    title: "Cards Castle",
     description:
-      "Writing code, understanding algorithms, and treating computation as a mathematical object.",
-    image: "/personal/hobbies/programming.jpg",
+      "Took all the cards from TSLAS (Purana Library), TIET-Patiala, without anyone noticing.",
+    image: "Castle.jpeg",
     icon: <Code2 className="h-4 w-4" />,
   },
-  {
-    title: "Photography",
-    description:
-      "Keeping fragments of places, objects, journeys, and ordinary moments worth remembering.",
-    image: "/personal/hobbies/photography.jpg",
-    icon: <Camera className="h-4 w-4" />,
-  },
-  {
-    title: "Music",
-    description:
-      "Listening, thinking, walking, and letting music occupy the spaces between difficult questions.",
-    image: "/personal/hobbies/music.jpg",
-    icon: <Music2 className="h-4 w-4" />,
-  },
-  {
-    title: "Running",
-    description:
-      "A simple physical counterweight to long hours spent at a desk.",
-    image: "/personal/hobbies/running.jpg",
-    icon: <Dumbbell className="h-4 w-4" />,
-  },
+  // {
+  //   title: "Photography",
+  //   description:
+  //     "Keeping fragments of places, objects, journeys, and ordinary moments worth remembering.",
+  //   image: "/personal/hobbies/photography.jpg",
+  //   icon: <Camera className="h-4 w-4" />,
+  // },
+  // {
+  //   title: "Music",
+  //   description:
+  //     "Listening, thinking, walking, and letting music occupy the spaces between difficult questions.",
+  //   image: "/personal/hobbies/music.jpg",
+  //   icon: <Music2 className="h-4 w-4" />,
+  // },
+  // {
+  //   title: "Running",
+  //   description:
+  //     "A simple physical counterweight to long hours spent at a desk.",
+  //   image: "/personal/hobbies/running.jpg",
+  //   icon: <Dumbbell className="h-4 w-4" />,
+  // },
 ]
 
 /* ============================================================
@@ -138,105 +150,48 @@ const hobbies: Hobby[] = [
 const gallery: GalleryItem[] = [
   {
     id: 1,
-    title: "An afternoon of work",
-    date: "03 · IX · 1806",
-    day: "Thursday",
+    title: "A lazy afternoon of work",
+    date: "02 · IX · 1806",
+    day: "Saturday",
     year: 1806,
     month: 9,
-    image: "/personal/gallery/1806-IX-03.jpg",
+    image: "Lazy_Noon.jpeg",
     description:
-      "A quiet afternoon spent between mathematics, code, and unfinished questions.",
+      "",
   },
   {
     id: 2,
-    title: "Whiteboard",
-    date: "30 · VIII · 1806",
+    title: "Leh, Ladakh, India",
+    date: "27 · VI · 1799",
     day: "Sunday",
-    year: 1806,
+    year: 1799,
     month: 8,
-    image: "/personal/gallery/1806-VIII-30.jpg",
+    image: "Ladakh.jpeg",
     description:
-      "A board after a long session of thinking and explaining.",
+      "",
   },
-  {
-    id: 3,
-    title: "A day outside",
-    date: "17 · VIII · 1806",
-    day: "Monday",
-    year: 1806,
-    month: 8,
-    image: "/personal/gallery/1806-VIII-17.jpg",
-    description:
-      "A small record from outside the workspace.",
-  },
-  {
-    id: 4,
-    title: "Old photograph",
-    date: "21 · VII · 1805",
-    day: "Thursday",
-    year: 1805,
-    month: 7,
-    image: "/personal/gallery/1805-VII-21.jpg",
-    description:
-      "An older fragment preserved in the archive.",
-  },
-]
-
-/* ============================================================
-   INDIA — VISITED STATES / UNION TERRITORIES
-   ============================================================ */
-
-/*
- * Visited:
- *
- * Punjab
- * Himachal Pradesh
- * Jammu & Kashmir
- * Ladakh
- * Chandigarh
- * Delhi (NCT)
- * Assam
- * Haryana
- */
-
-const visitedPlaces: VisitedPlace[] = [
-  /* VISITED */
-
-  { state: "Punjab", code: "PB", visited: true },
-  { state: "Himachal Pradesh", code: "HP", visited: true },
-  { state: "Jammu & Kashmir", code: "JK", visited: true },
-  { state: "Ladakh", code: "LA", visited: true },
-  { state: "Chandigarh", code: "CH", visited: true },
-  { state: "Delhi", code: "DL", visited: true },
-  { state: "Assam", code: "AS", visited: true },
-  { state: "Haryana", code: "HR", visited: true },
-
-  /* NOT VISITED */
-
-  { state: "Rajasthan", code: "RJ", visited: false },
-  { state: "Uttar Pradesh", code: "UP", visited: false },
-  { state: "Uttarakhand", code: "UK", visited: false },
-  { state: "Maharashtra", code: "MH", visited: false },
-  { state: "Bihar", code: "BR", visited: false },
-  { state: "Jharkhand", code: "JH", visited: false },
-  { state: "West Bengal", code: "WB", visited: false },
-  { state: "Sikkim", code: "SK", visited: false },
-  { state: "Arunachal Pradesh", code: "AR", visited: false },
-  { state: "Nagaland", code: "NL", visited: false },
-  { state: "Manipur", code: "MN", visited: false },
-  { state: "Mizoram", code: "MZ", visited: false },
-  { state: "Tripura", code: "TR", visited: false },
-  { state: "Meghalaya", code: "ML", visited: false },
-  { state: "Gujarat", code: "GJ", visited: false },
-  { state: "Madhya Pradesh", code: "MP", visited: false },
-  { state: "Chhattisgarh", code: "CG", visited: false },
-  { state: "Odisha", code: "OD", visited: false },
-  { state: "Goa", code: "GA", visited: false },
-  { state: "Karnataka", code: "KA", visited: false },
-  { state: "Kerala", code: "KL", visited: false },
-  { state: "Tamil Nadu", code: "TN", visited: false },
-  { state: "Andhra Pradesh", code: "AP", visited: false },
-  { state: "Telangana", code: "TG", visited: false },
+  // {
+  //   id: 3,
+  //   title: "A day outside",
+  //   date: "17 · VIII · 1806",
+  //   day: "Monday",
+  //   year: 1806,
+  //   month: 8,
+  //   image: "/personal/gallery/1806-VIII-17.jpg",
+  //   description:
+  //     "A small record from outside the workspace.",
+  // },
+  // {
+  //   id: 4,
+  //   title: "Old photograph",
+  //   date: "21 · VII · 1805",
+  //   day: "Thursday",
+  //   year: 1805,
+  //   month: 7,
+  //   image: "/personal/gallery/1805-VII-21.jpg",
+  //   description:
+  //     "An older fragment preserved in the archive.",
+  // },
 ]
 
 /* ============================================================
@@ -258,7 +213,22 @@ const romanMonths = [
   "XII",
 ]
 
-const years = [1806, 1805, 1804, 1803, 1802]
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+]
+
+const years = [1806, 1805, 1804, 1803, 1802, 1801, 1800, 1799]
 
 /* ============================================================
    PAGE
@@ -270,9 +240,6 @@ export default function PersonalPage() {
 
   const [selectedMonth, setSelectedMonth] =
     useState<number | "ALL">("ALL")
-
-  const [selectedState, setSelectedState] =
-    useState<string | null>(null)
 
   const filteredGallery = useMemo(() => {
     return gallery.filter((item) => {
@@ -287,10 +254,6 @@ export default function PersonalPage() {
       return yearMatch && monthMatch
     })
   }, [selectedYear, selectedMonth])
-
-  const visitedCount = visitedPlaces.filter(
-    (place) => place.visited
-  ).length
 
   return (
     <SidebarProvider>
@@ -610,17 +573,37 @@ export default function PersonalPage() {
                           {item.label}
                         </div>
 
-                        <div
-                          className="
-                            mt-2
-                            font-serif
-                            text-lg
-                            leading-relaxed
-                            text-zinc-200
-                          "
-                        >
-                          {item.value}
-                        </div>
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="
+                              mt-2
+                              block
+                              font-serif
+                              text-lg
+                              leading-relaxed
+                              text-zinc-200
+                              transition-colors
+                              hover:text-blue-200
+                            "
+                          >
+                            {item.value}
+                          </a>
+                        ) : (
+                          <div
+                            className="
+                              mt-2
+                              font-serif
+                              text-lg
+                              leading-relaxed
+                              text-zinc-200
+                            "
+                          >
+                            {item.value}
+                          </div>
+                        )}
 
                       </div>
 
@@ -668,76 +651,37 @@ export default function PersonalPage() {
                 {hobbies.map((hobby, index) => (
                   <div
                     key={hobby.title}
-                    className={`
-                      group
+                    className="
                       overflow-hidden
                       border
                       border-white/[0.08]
                       bg-[#11151b]
-                      ${index === 0 ? "xl:col-span-2" : ""}
-                    `}
+                    "
                   >
 
-                    <div
-                      className={`
-                        relative
-                        overflow-hidden
-                        bg-[#0c1016]
-                        ${index === 0 ? "h-72" : "h-56"}
-                      `}
+                    <a
+                      href={hobby.image}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                      aria-label={`Open ${hobby.title} image in a new tab`}
                     >
+                      <div className="relative h-52 overflow-hidden bg-[#0c1016]">
 
-                      <img
-                        src={hobby.image}
-                        alt={hobby.title}
-                        className="
-                          h-full
-                          w-full
-                          object-cover
-                          opacity-70
-                          grayscale
-                          transition-all
-                          duration-700
-                          group-hover:scale-[1.025]
-                          group-hover:opacity-90
-                          group-hover:grayscale-0
-                        "
-                      />
+                        <img
+                          src={hobby.image}
+                          alt={hobby.title}
+                          className="h-full w-full object-cover"
+                        />
 
-                      <div
-                        className="
-                          absolute
-                          inset-0
-                          bg-gradient-to-t
-                          from-[#11151b]
-                          via-transparent
-                          to-transparent
-                        "
-                      />
-
-                      <div
-                        className="
-                          absolute
-                          left-5
-                          top-5
-                          flex
-                          h-9
-                          w-9
-                          items-center
-                          justify-center
-                          border
-                          border-white/[0.10]
-                          bg-[#080b10]/80
-                          text-blue-300/60
-                          backdrop-blur-sm
-                        "
-                      >
-                        {hobby.icon}
                       </div>
-
-                    </div>
+                    </a>
 
                     <div className="p-6">
+
+                      <div className="mb-4 text-blue-300/60">
+                        {hobby.icon}
+                      </div>
 
                       <div
                         className="
@@ -827,6 +771,7 @@ export default function PersonalPage() {
                         key={year}
                         active={selectedYear === year}
                         onClick={() => setSelectedYear(year)}
+                        title={String(year + 220)}
                       >
                         {year}
                       </FilterButton>
@@ -866,6 +811,7 @@ export default function PersonalPage() {
                         onClick={() =>
                           setSelectedMonth(index + 1)
                         }
+                        title={monthNames[index]}
                       >
                         {month}
                       </FilterButton>
@@ -914,14 +860,13 @@ export default function PersonalPage() {
 
                 ) : (
 
-                  <div className="grid gap-5 md:grid-cols-2">
+                  <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
 
                     {filteredGallery.map((item) => (
 
                       <article
                         key={item.id}
                         className="
-                          group
                           overflow-hidden
                           border
                           border-white/[0.08]
@@ -929,56 +874,31 @@ export default function PersonalPage() {
                         "
                       >
 
-                        <div className="relative h-72 overflow-hidden">
+                        <a
+                          href={item.image}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                          aria-label={`Open ${item.title} in a new tab`}
+                        >
+                          <div className="relative h-52 overflow-hidden bg-[#0c1016]">
 
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="
-                              h-full
-                              w-full
-                              object-cover
-                              opacity-75
-                              grayscale-[35%]
-                              transition-all
-                              duration-700
-                              group-hover:scale-[1.025]
-                              group-hover:opacity-95
-                              group-hover:grayscale-0
-                            "
-                          />
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="h-full w-full object-cover"
+                            />
 
-                          <div
-                            className="
-                              absolute
-                              inset-x-0
-                              bottom-0
-                              h-32
-                              bg-gradient-to-t
-                              from-[#11151b]
-                              to-transparent
-                            "
-                          />
-
-                          <div
-                            className="
-                              absolute
-                              bottom-5
-                              left-5
-                              font-mono
-                              text-[10px]
-                              tracking-[0.16em]
-                              text-blue-200/70
-                            "
-                          >
-                            {item.date}
                           </div>
-
-                        </div>
+                        </a>
 
                         <div className="p-6">
 
-                          <div className="flex items-center justify-between gap-5">
+                          <div className="font-mono text-[10px] tracking-[0.16em] text-blue-200/70">
+                            {item.date}
+                          </div>
+
+                          <div className="mt-4 flex items-center justify-between gap-5">
 
                             <h3
                               className="
@@ -1032,277 +952,10 @@ export default function PersonalPage() {
             </section>
 
             {/* =================================================
-                04 — PLACES VISITED
-                ================================================= */}
-
-            <section className="py-20 md:py-28">
-
-              <SectionHeading
-                number="04"
-                title="Places I Visited"
-                description="A geographical record of movement across India."
-              />
-
-              <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_310px]">
-
-                {/* =================================================
-                    INTERACTIVE MAP
-                    ================================================= */}
-
-                <div
-                  className="
-                    relative
-                    min-h-[620px]
-                    overflow-hidden
-                    border
-                    border-white/[0.08]
-                    bg-[#080b10]
-                  "
-                >
-
-                  {/* MAP GRID */}
-
-                  <div
-                    className="
-                      pointer-events-none
-                      absolute
-                      inset-0
-                      opacity-[0.025]
-                    "
-                    style={{
-                      backgroundImage: `
-                        linear-gradient(
-                          rgba(255,255,255,1) 1px,
-                          transparent 1px
-                        ),
-                        linear-gradient(
-                          90deg,
-                          rgba(255,255,255,1) 1px,
-                          transparent 1px
-                        )
-                      `,
-                      backgroundSize: "36px 36px",
-                    }}
-                  />
-
-                  {/* ACTUAL INDIA MAP */}
-
-                  <div
-                    className="
-                      absolute
-                      inset-0
-                      flex
-                      items-center
-                      justify-center
-                      p-8
-                      md:p-16
-                    "
-                  >
-
-                    <div className="relative w-full max-w-[720px]">
-
-                      <IndiaMap
-                        width="100%"
-                        height="auto"
-                        showTooltip={true}
-                        animated={true}
-                      />
-
-                    </div>
-
-                  </div>
-
-                  {/* MAP LABEL */}
-
-                  <div className="absolute left-6 top-3 z-10">
-
-                    <div
-                      className="
-                        font-mono
-                        text-[9px]
-                        uppercase
-                        tracking-[0.25em]
-                        text-yellow-300
-                      "
-                    >
-                      INDIA / GEOGRAPHICAL REGISTER
-                    </div>
-
-                    <div className="mt-2 font-serif text-xl text-yellow-300">
-                      {visitedCount} places recorded
-                    </div>
-
-                  </div>
-
-                </div>
-
-                {/* =================================================
-                    STATE LIST
-                    ================================================= */}
-
-                <div className="border border-white/[0.08] bg-[#11151b]">
-
-                  <div
-                    className="
-                      border-b
-                      border-white/[0.08]
-                      p-6
-                    "
-                  >
-
-                    <div
-                      className="
-                        font-mono
-                        text-[9px]
-                        uppercase
-                        tracking-[0.25em]
-                        text-blue-300/45
-                      "
-                    >
-                      State register
-                    </div>
-
-                    <p
-                      className="
-                        mt-3
-                        font-serif
-                        text-sm
-                        leading-[1.7]
-                        text-zinc-500
-                    "
-                    >
-                      Hover or select a state to inspect its entry.
-                    </p>
-
-                  </div>
-
-                  <div className="max-h-[510px] overflow-y-auto">
-
-                    {visitedPlaces.map((place) => (
-
-                      <button
-                        key={place.code}
-                        type="button"
-                        onMouseEnter={() =>
-                          setSelectedState(place.state)
-                        }
-                        onMouseLeave={() =>
-                          setSelectedState(null)
-                        }
-                        className="
-                          flex
-                          w-full
-                          items-center
-                          justify-between
-                          border-b
-                          border-white/[0.05]
-                          px-6
-                          py-4
-                          text-left
-                          transition-colors
-                          duration-200
-                          hover:bg-[#171d27]
-                        "
-                      >
-
-                        <div className="flex items-center gap-4">
-
-                          <span
-                            className={`
-                              h-2
-                              w-2
-                              shrink-0
-                              ${
-                                place.visited
-                                  ? "bg-blue-300/75"
-                                  : "bg-zinc-700"
-                              }
-                            `}
-                          />
-
-                          <span
-                            className={`
-                              font-serif
-                              text-sm
-                              ${
-                                place.visited
-                                  ? "text-zinc-200"
-                                  : "text-zinc-600"
-                              }
-                            `}
-                          >
-                            {place.state}
-                          </span>
-
-                        </div>
-
-                        <span
-                          className="
-                            font-mono
-                            text-[9px]
-                            tracking-[0.18em]
-                            text-slate-700
-                          "
-                        >
-                          {place.code}
-                        </span>
-
-                      </button>
-
-                    ))}
-
-                  </div>
-
-                  {selectedState && (
-
-                    <div
-                      className="
-                        border-t
-                        border-blue-200/[0.08]
-                        bg-[#0c121b]
-                        px-6
-                        py-5
-                      "
-                    >
-
-                      <div
-                        className="
-                          font-mono
-                          text-[9px]
-                          uppercase
-                          tracking-[0.25em]
-                          text-blue-300/45
-                        "
-                      >
-                        Selected
-                      </div>
-
-                      <div
-                        className="
-                          mt-2
-                          font-serif
-                          text-xl
-                          text-zinc-200
-                        "
-                      >
-                        {selectedState}
-                      </div>
-
-                    </div>
-
-                  )}
-
-                </div>
-
-              </div>
-
-            </section>
-
-            {/* =================================================
                 CLOSING
                 ================================================= */}
 
-            <section className="border-t border-white/[0.08] py-16">
+            {/* <section className="border-t border-white/[0.08] py-16">
 
               <div
                 className="
@@ -1365,7 +1018,7 @@ export default function PersonalPage() {
 
               </div>
 
-            </section>
+            </section> */}
 
           </div>
         </div>
@@ -1456,15 +1109,18 @@ function FilterButton({
   children,
   active,
   onClick,
+  title,
 }: {
   children: React.ReactNode
   active: boolean
   onClick: () => void
+  title?: string
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      title={title}
       className={`
         rounded-sm
         border

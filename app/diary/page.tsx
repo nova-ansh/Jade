@@ -19,7 +19,7 @@ type Domain =
   | "Theoretical Computer Science"
   | "Research"
   | "Teaching"
-  | "Slice of Life"
+  | "Personal"
 
 type Status =
   | "Ongoing"
@@ -47,123 +47,40 @@ type DiaryEntry = {
 
 const entries: DiaryEntry[] = [
   {
-    number: "017",
+    number: "011",
     date: "03 · IX · 1806",
     day: "Thursday",
     title:
-      "On the nature of a proof which refuseth to remain merely formal",
-    domain: "Mathematics",
-    subject: "Mathematical Reasoning",
+      "What do I mean by India?",
+    domain: "Personal",
+    subject: "Philosophical Argument",
     excerpt:
-      "A proof may establish a proposition without yet revealing why the proposition ought to be true. The distinction is subtle, but not without consequence.",
+      "Yet to be updated",
     observation:
-      "Proof is considered not merely as certification, but as an instrument by which structure is made visible.",
+      "Yet to be updated",
     status: "Ongoing",
-    readingTime: "06 min",
+    readingTime: "02 min",
     mark: "∴",
   },
 
   {
-    number: "016",
-    date: "02 · IX · 1806",
-    day: "Wednesday",
+    number: "012",
+    date: "11 · IX · 1806",
+    day: "Friday",
     title:
-      "A small inquiry concerning infinite processes",
+      "Is Mathematics Created or Discovered?",
     domain: "Mathematics",
-    subject: "Foundations",
+    subject: "Foundations of Mathematics",
     excerpt:
-      "The difficulty lieth not always in infinity itself, but in the manner by which a finite statement is made to speak of it.",
+      "yet to be updated",
     observation:
-      "An important distinction appeareth between an infinite object and an indefinitely continued procedure.",
-    status: "Reconsidering",
-    readingTime: "09 min",
+      "yet to be updated",
+    status: "Ongoing",
+    readingTime: "02 min",
     mark: "∞",
   },
 
-  {
-    number: "015",
-    date: "31 · VIII · 1806",
-    day: "Tuesday",
-    title:
-      "When a machine may be understood as a mathematical object",
-    domain: "Theoretical Computer Science",
-    subject: "Automata Theory",
-    excerpt:
-      "The machine is finite; the language need not be. What matters is the correspondence between the two.",
-    observation:
-      "The transition system becomes clearer when treated as a structure first and an implementation second.",
-    status: "Resolved",
-    readingTime: "07 min",
-    mark: "λ",
-  },
-
-  {
-    number: "014",
-    date: "30 · VIII · 1806",
-    day: "Monday",
-    title:
-      "On relations, constructions, and the discipline of definitions",
-    domain: "Theoretical Computer Science",
-    subject: "Set Theory",
-    excerpt:
-      "Many confusions which appear profound are born from a definition left slightly imprecise.",
-    observation:
-      "The exercise of defining an object carefully often resolveth a question before any theorem is invoked.",
-    status: "Recorded",
-    readingTime: "05 min",
-    mark: "⊂",
-  },
-
-  {
-    number: "013",
-    date: "28 · VIII · 1806",
-    day: "Saturday",
-    title:
-      "A graph family takes form",
-    domain: "Research",
-    subject: "Graph Theory",
-    excerpt:
-      "The repeated construction suggesteth that what first appeared as several examples may in fact belong to one coherent family.",
-    observation:
-      "The useful question is no longer whether the examples possess a property, but whether the construction itself compelleth that property.",
-    status: "Ongoing",
-    readingTime: "11 min",
-    mark: "G",
-  },
-
-  {
-    number: "012",
-    date: "26 · VIII · 1806",
-    day: "Thursday",
-    title:
-      "Concerning the habit of asking what a theorem is really saying",
-    domain: "Mathematics",
-    subject: "Proof & Structure",
-    excerpt:
-      "A theorem often containeth more information than the sentence by which it is ordinarily stated.",
-    observation:
-      "The distinction between the statement of a result and the structure which maketh the result inevitable is under examination.",
-    status: "Ongoing",
-    readingTime: "08 min",
-    mark: "□",
-  },
-
-  {
-    number: "011",
-    date: "7 · IX · 1806",
-    day: "Monday",
-    title:
-      "The selfsame ornage tinge doth bestow the selfsame warmth!",
-    domain: "Slice of Life",
-    subject: "",
-    excerpt:
-      "That which cannot be rendered intelligible to another mind hath perhaps not yet become intelligible to one's own.",
-    observation:
-      "Teaching exposed several gaps which private calculation had allowed to remain unseen.",
-    status: "Recorded",
-    readingTime: "06 min",
-    mark: "↗",
-  },
+  
 ]
 
 /* ============================================================
@@ -724,7 +641,7 @@ export default function DiaryPage() {
                 Present inquiry
               </span>
 
-              <span className="h-1 w-1 rounded-full bg-blue-400/40" />
+              <span className="status-dot h-2 w-2 rounded-full bg-blue-400" />
 
               <span
                 className="
@@ -734,7 +651,7 @@ export default function DiaryPage() {
                   text-slate-400
                 "
               >
-                The structure beneath the question
+                What makes the life meaningful?
               </span>
 
             </div>
@@ -834,18 +751,6 @@ export default function DiaryPage() {
 
                 <div>
 
-                  <div
-                    className="
-                      font-mono
-                      text-[10px]
-                      uppercase
-                      tracking-[0.30em]
-                      text-blue-300/55
-                    "
-                  >
-                    Workspace / Intellectual Register
-                  </div>
-
                   <h1
                     className="
                       mt-9
@@ -878,20 +783,6 @@ export default function DiaryPage() {
                   </p>
 
                   <div className="mt-12 flex items-center gap-4">
-
-                    <span className="h-px w-12 bg-blue-300/35" />
-
-                    <span
-                      className="
-                        font-serif
-                        text-sm
-                        italic
-                        text-zinc-500
-                      "
-                    >
-                      wherein the work is permitted to remain unfinished
-                    </span>
-
                   </div>
 
                 </div>
@@ -924,18 +815,18 @@ export default function DiaryPage() {
                   <div className="mt-5 flex items-center gap-4">
 
                     <NumberCircle>
-                      017
-                    </NumberCircle>
+  {String(entries.length).padStart(3, "0")}
+</NumberCircle>
 
-                    <span
-                      className="
-                        font-serif
-                        text-xl
-                        text-white
-                      "
-                    >
-                      017
-                    </span>
+<span
+  className="
+    font-serif
+    text-xl
+    text-white
+  "
+>
+  {String(entries.length).padStart(3, "0")}
+</span>
 
                   </div>
 
@@ -976,7 +867,7 @@ export default function DiaryPage() {
                 DEFINITION
                 ================================================= */}
 
-            <section className="pt-24 md:pt-28">
+            {/* <section className="pt-24 md:pt-28">
 
               <SectionHeader
                 number="01"
@@ -1101,7 +992,7 @@ export default function DiaryPage() {
 
               </div>
 
-            </section>
+            </section> */}
 
             {/* =================================================
                 PRESENT ENTRY
@@ -1110,7 +1001,7 @@ export default function DiaryPage() {
             <section className="mt-28 md:mt-36">
 
               <SectionHeader
-                number="02"
+                number="01"
                 title="Present Entry"
                 meta="The matter presently at hand"
               />
@@ -1140,7 +1031,7 @@ export default function DiaryPage() {
             <section className="mt-28 md:mt-36">
 
               <SectionHeader
-                number="03"
+                number="02"
                 title="The Archive"
                 meta="Earlier recorded inquiries"
               />
@@ -1243,7 +1134,7 @@ export default function DiaryPage() {
                 MARGINALIA
                 ================================================= */}
 
-            <section className="mt-28 md:mt-36">
+            {/* <section className="mt-28 md:mt-36">
 
               <SectionHeader
                 number="04"
@@ -1368,13 +1259,13 @@ export default function DiaryPage() {
 
               </div>
 
-            </section>
+            </section> */}
 
 {/* =================================================
                 CLOSING REGISTER
                 ================================================= */}
 
-            <section className="mt-28 md:mt-36">
+            {/* <section className="mt-28 md:mt-36">
 
               <div
                 className="
@@ -1468,7 +1359,7 @@ export default function DiaryPage() {
 
               </div>
 
-            </section>
+            </section> */}
 
           </div>
 

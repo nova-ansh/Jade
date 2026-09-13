@@ -71,11 +71,47 @@ const videos: FavouriteLink[] = [
     tags: ["Mathematics", "Film", "Logic", "Scientist"],
     source: "YouTube",
   },
+  {
+    number: "012",
+    date: "13 · IX · 2026",
+    title: "Theoretical Computer Science Professor be link",
+    caption:
+      "Theory Computer Science Professors Be Like (Parody) from EASY THEORY (YT Channel)",
+    url: "https://youtu.be/jYgyTvvcM6c?si=PnqpxqaDU3xBUvLY",
+    tags: ["Recipe", "Film", "Teaching"],
+    source: "YouTube",
+  },
 ]
 
-const thingsFound: FavouriteLink[] = []
+const thingsFound: FavouriteLink[] = [
 
-const culturalRegister: FavouriteLink[] = []
+  {
+    number: "011",
+    date: "13 · IX · 2026",
+    title: "Tum Aapna Ranj O Gham, Aapni Pareeshani Mujhe by Sahir Ludhviani",
+    caption:
+      "Cover by Dr. Radhika Chopra",
+    url: "https://youtu.be/PmXOtVurWqg?si=H1fExAByy41atEAH",
+    tags: ["Personal", "Music", "Culture"],
+    source: "YouTube",
+  },
+
+]
+
+const culturalRegister: FavouriteLink[] = [
+
+    {
+    number: "011",
+    date: "13 · IX · 2026",
+    title: "Standard Omelet vs. Classic French Omelet",
+    caption:
+      "from Jacques Pépin Foundation (YT Channel)",
+    url: "https://youtu.be/viUNdDENnDU?si=65_HEqdFH0XpgrAu",
+    tags: ["Culture", "Food", "Recipe"],
+    source: "YouTube",
+  },
+
+]
 
 /* ============================================================
    ALL AVAILABLE TAGS
@@ -136,16 +172,15 @@ function Tag({
         inline-flex
         items-center
         border
-        border-blue-200/[0.13]
-        bg-[#202936]
+        border-white/[0.08]
+        bg-[#151b23]
         px-3
         py-1.5
         font-mono
         text-[9px]
         uppercase
         tracking-[0.16em]
-        text-blue-100/70
-        shadow-[0_0_18px_rgba(100,160,220,0.035)]
+        text-blue-100/60
       "
     >
       {children}
@@ -173,7 +208,7 @@ function SectionHeader({
         flex-col
         gap-5
         border-b
-        border-white/[0.09]
+        border-white/[0.08]
         pb-7
         md:flex-row
         md:items-center
@@ -191,13 +226,12 @@ function SectionHeader({
             justify-center
             rounded-full
             border
-            border-blue-300/[0.20]
-            bg-blue-400/[0.055]
+            border-white/[0.10]
+            bg-[#11161d]
             font-mono
             text-[10px]
             tracking-[0.08em]
-            text-blue-200
-            shadow-[0_0_25px_rgba(100,160,220,0.05)]
+            text-zinc-500
           "
         >
           {number}
@@ -222,7 +256,7 @@ function SectionHeader({
           text-[10px]
           uppercase
           tracking-[0.20em]
-          text-blue-300/45
+          text-zinc-600
         "
       >
         {meta}
@@ -249,8 +283,8 @@ function EmptyRegister({
       className="
         border
         border-dashed
-        border-white/[0.09]
-        bg-[#121821]
+        border-white/[0.08]
+        bg-[#11161d]
         px-7
         py-10
         md:px-10
@@ -266,9 +300,9 @@ function EmptyRegister({
             items-center
             justify-center
             border
-            border-blue-200/[0.12]
-            bg-blue-400/[0.04]
-            text-blue-300/45
+            border-white/[0.08]
+            bg-[#0d1218]
+            text-zinc-600
           "
         >
           {icon}
@@ -302,15 +336,15 @@ function FilteredEmpty({
       className="
         border
         border-dashed
-        border-blue-200/[0.09]
-        bg-[#11171f]
+        border-white/[0.08]
+        bg-[#11161d]
         px-7
         py-8
       "
     >
       <p className="font-serif text-base text-zinc-500">
         Nothing recorded under{" "}
-        <span className="text-blue-200/70">
+        <span className="text-zinc-300">
           {tag}
         </span>{" "}
         in this register yet.
@@ -346,51 +380,12 @@ function LinkCard({
   return (
     <article
       className="
-        group
-        relative
         overflow-hidden
         border
-        border-blue-100/[0.10]
-        bg-[#171d26]
-        shadow-[0_12px_40px_rgba(0,0,0,0.18)]
-        transition-all
-        duration-300
-        hover:border-blue-200/[0.20]
-        hover:bg-[#1b222d]
-        hover:shadow-[0_18px_55px_rgba(30,80,130,0.10)]
+        border-white/[0.08]
+        bg-[#141a22]
       "
     >
-      {/* TOP ACCENT */}
-
-      <div
-        className="
-          absolute
-          inset-x-0
-          top-0
-          h-px
-          bg-blue-200/[0.10]
-          transition-all
-          duration-300
-          group-hover:bg-blue-200/[0.24]
-        "
-      />
-
-      {/* LEFT ACCENT */}
-
-      <div
-        className="
-          absolute
-          bottom-0
-          left-0
-          top-0
-          w-px
-          bg-blue-300/[0.08]
-          transition-all
-          duration-300
-          group-hover:bg-blue-300/[0.30]
-        "
-      />
-
       <div
         className="
           grid
@@ -413,17 +408,11 @@ function LinkCard({
               justify-center
               rounded-full
               border
-              border-blue-300/[0.18]
-              bg-blue-400/[0.055]
+              border-white/[0.10]
+              bg-[#0e1319]
               font-mono
               text-[10px]
-              text-zinc-400
-              shadow-[0_0_22px_rgba(100,160,220,0.04)]
-              transition-all
-              duration-300
-              group-hover:border-blue-300/[0.35]
-              group-hover:bg-blue-400/[0.09]
-              group-hover:text-blue-200
+              text-zinc-500
             "
           >
             {item.number}
@@ -433,6 +422,7 @@ function LinkCard({
         {/* MAIN */}
 
         <div className="min-w-0">
+
           {/* TAGS */}
 
           <div className="mb-5 flex flex-wrap items-center gap-2">
@@ -445,15 +435,15 @@ function LinkCard({
                 inline-flex
                 items-center
                 border
-                border-white/[0.09]
-                bg-[#11161d]
+                border-white/[0.08]
+                bg-[#0f141a]
                 px-3
                 py-1.5
                 font-mono
                 text-[9px]
                 uppercase
                 tracking-[0.16em]
-                text-zinc-500
+                text-zinc-600
               "
             >
               {item.source}
@@ -470,9 +460,6 @@ function LinkCard({
               leading-[1.2]
               tracking-[-0.018em]
               text-white
-              transition-colors
-              duration-300
-              group-hover:text-blue-50
               md:text-[32px]
             "
           >
@@ -502,21 +489,20 @@ function LinkCard({
               flex
               flex-col
               gap-4
-              border-l
-              border-blue-300/[0.18]
-              bg-[#11161d]/45
-              py-3
-              pl-4
+              border-t
+              border-white/[0.07]
+              pt-5
               sm:flex-row
               sm:items-center
               sm:justify-between
-              sm:pl-5
             "
           >
+            {/* URL */}
+
             <p
               className="
                 min-w-0
-                max-w-2xl
+                flex-1
                 truncate
                 font-mono
                 text-[9px]
@@ -528,34 +514,40 @@ function LinkCard({
               {item.url}
             </p>
 
-            <div className="flex shrink-0 items-center gap-2">
+            {/* ACTIONS */}
+
+            <div
+              className="
+                flex
+                shrink-0
+                items-center
+                border
+                border-white/[0.08]
+              "
+            >
               {/* COPY */}
 
               <button
+                type="button"
                 onClick={copyLink}
                 className="
                   inline-flex
                   h-9
                   items-center
                   gap-2
-                  border
-                  border-white/[0.09]
-                  bg-[#171d25]
+                  border-r
+                  border-white/[0.08]
+                  bg-[#11161d]
                   px-3
                   font-mono
                   text-[9px]
                   uppercase
                   tracking-[0.14em]
                   text-zinc-500
-                  transition-all
-                  duration-200
-                  hover:border-blue-200/[0.18]
-                  hover:bg-[#202936]
-                  hover:text-blue-100
                 "
               >
                 {copied ? (
-                  <Check className="h-3 w-3 text-blue-300" />
+                  <Check className="h-3 w-3 text-zinc-400" />
                 ) : (
                   <Copy className="h-3 w-3" />
                 )}
@@ -574,20 +566,13 @@ function LinkCard({
                   h-9
                   items-center
                   gap-2
-                  border
-                  border-blue-200/[0.14]
-                  bg-blue-400/[0.055]
+                  bg-[#11161d]
                   px-4
                   font-mono
                   text-[9px]
                   uppercase
                   tracking-[0.14em]
-                  text-blue-200/75
-                  transition-all
-                  duration-200
-                  hover:border-blue-200/[0.28]
-                  hover:bg-blue-400/[0.10]
-                  hover:text-blue-100
+                  text-zinc-400
                 "
               >
                 Open
@@ -627,11 +612,6 @@ function LinkCard({
               h-5
               w-5
               text-zinc-700
-              transition-all
-              duration-300
-              group-hover:translate-x-0.5
-              group-hover:-translate-y-0.5
-              group-hover:text-blue-300/60
             "
           />
         </div>
@@ -699,8 +679,6 @@ export default function FavouriteLinksPage() {
 
   /* ==========================================================
      FILTER FUNCTION
-
-     A selected tag searches EVERY register.
      ========================================================== */
 
   function filterItems(items: FavouriteLink[]) {
@@ -725,10 +703,6 @@ export default function FavouriteLinksPage() {
   function selectTag(tag: FilterTag) {
     setSelectedTag(tag)
 
-    /*
-      Small delay allows the state to update before scrolling.
-      The user can click a tag and immediately see the results.
-    */
     setTimeout(() => {
       window.scrollTo({
         top: 0,
@@ -749,6 +723,7 @@ export default function FavouriteLinksPage() {
           text-zinc-100
         "
       >
+
         {/* ======================================================
             HEADER
             ====================================================== */}
@@ -760,9 +735,8 @@ export default function FavouriteLinksPage() {
             z-50
             h-16
             border-b
-            border-blue-200/[0.08]
-            bg-[#0b111c]/95
-            backdrop-blur-md
+            border-white/[0.07]
+            bg-[#0b1118]
           "
         >
           <div
@@ -776,31 +750,24 @@ export default function FavouriteLinksPage() {
             "
           >
             <div className="flex items-center gap-3">
+
               <div
                 className="
-                  rounded-lg
                   border
-                  border-blue-200/[0.10]
-                  bg-[#111a2a]
-                  transition-all
-                  duration-300
-                  hover:border-blue-200/[0.18]
-                  hover:bg-[#162238]
+                  border-white/[0.08]
+                  bg-[#11161d]
                 "
               >
                 <SidebarTrigger
                   className="
                     h-9
                     w-9
-                    text-slate-400
-                    transition-colors
-                    hover:bg-blue-400/[0.08]
-                    hover:text-blue-200
+                    text-slate-500
                   "
                 />
               </div>
 
-              <div className="hidden h-5 w-px bg-blue-200/[0.08] sm:block" />
+              <div className="hidden h-5 w-px bg-white/[0.07] sm:block" />
 
               <span
                 className="
@@ -808,7 +775,7 @@ export default function FavouriteLinksPage() {
                   text-xs
                   uppercase
                   tracking-[0.28em]
-                  text-slate-400
+                  text-slate-500
                   sm:block
                 "
               >
@@ -833,7 +800,7 @@ export default function FavouriteLinksPage() {
                   text-[10px]
                   uppercase
                   tracking-[0.20em]
-                  text-blue-300/55
+                  text-zinc-500
                 "
               >
                 Favourite Links
@@ -841,12 +808,13 @@ export default function FavouriteLinksPage() {
 
               <span className="status-dot h-2 w-2 rounded-full bg-blue-400" />
 
-              <span className="text-sm text-slate-500">
+              <span className="text-sm text-slate-600">
                 things worth keeping
               </span>
             </div>
 
             <div className="flex items-center gap-4">
+
               <span
                 className="
                   hidden
@@ -863,9 +831,10 @@ export default function FavouriteLinksPage() {
                   : `${filteredTotal} found`}
               </span>
 
-              <div className="hidden h-5 w-px bg-blue-200/[0.08] md:block" />
+              <div className="hidden h-5 w-px bg-white/[0.07] md:block" />
 
-              <Link2 className="h-4 w-4 text-blue-300/40" />
+              <Link2 className="h-4 w-4 text-zinc-600" />
+
             </div>
           </div>
         </header>
@@ -875,6 +844,7 @@ export default function FavouriteLinksPage() {
             ====================================================== */}
 
         <div className="relative">
+
           {/* MATHEMATICAL GRID */}
 
           <div
@@ -882,7 +852,7 @@ export default function FavouriteLinksPage() {
               pointer-events-none
               absolute
               inset-0
-              opacity-[0.035]
+              opacity-[0.025]
             "
             style={{
               backgroundImage: `
@@ -912,6 +882,7 @@ export default function FavouriteLinksPage() {
               lg:px-12
             "
           >
+
             {/* =================================================
                 HERO
                 ================================================= */}
@@ -928,17 +899,18 @@ export default function FavouriteLinksPage() {
               "
             >
               <div className="grid gap-16 lg:grid-cols-[1fr_280px]">
+
                 <div>
+
                   <div
                     className="
                       font-mono
                       text-[10px]
                       uppercase
                       tracking-[0.30em]
-                      text-blue-300/55
+                      text-zinc-600
                     "
                   >
-                    Personal Register / External Matter
                   </div>
 
                   <h1
@@ -974,69 +946,47 @@ export default function FavouriteLinksPage() {
                   </p>
 
                   <div className="mt-12 flex items-center gap-4">
-                    <span className="h-px w-12 bg-blue-300/35" />
+
+                    <span className="h-px w-12 bg-zinc-700" />
 
                     <span
                       className="
                         font-serif
                         text-sm
                         italic
-                        text-zinc-500
+                        text-zinc-600
                       "
                     >
-                      because the internet forgetteth nothing,
-                      yet one still loseth everything
                     </span>
+
                   </div>
 
-                  {/* =================================================
-                      FILTER JUMP
-                      ================================================= */}
+                  {/* FILTER JUMP */}
 
                   <a
                     href="#tag-register"
                     className="
-                      group
                       mt-10
                       inline-flex
                       items-center
                       gap-3
                       border
-                      border-blue-200/[0.10]
-                      bg-blue-400/[0.035]
+                      border-white/[0.08]
+                      bg-[#11161d]
                       px-4
                       py-3
-                      transition-all
-                      duration-300
-                      hover:border-blue-200/[0.22]
-                      hover:bg-blue-400/[0.07]
+                      font-mono
+                      text-[9px]
+                      uppercase
+                      tracking-[0.18em]
+                      text-zinc-500
                     "
                   >
-                    <span
-                      className="
-                        font-mono
-                        text-[9px]
-                        uppercase
-                        tracking-[0.18em]
-                        text-blue-200/55
-                        transition-colors
-                        group-hover:text-blue-100/80
-                      "
-                    >
-                      Filter the collection by tag
-                    </span>
+                    Filter the collection by tag
 
-                    <ChevronDown
-                      className="
-                        h-3.5
-                        w-3.5
-                        text-blue-300/45
-                        transition-transform
-                        duration-300
-                        group-hover:translate-y-0.5
-                      "
-                    />
+                    <ChevronDown className="h-3.5 w-3.5 text-zinc-600" />
                   </a>
+
                 </div>
 
                 {/* REGISTER SUMMARY */}
@@ -1051,9 +1001,11 @@ export default function FavouriteLinksPage() {
                     pl-8
                   "
                 >
+
                   <Label>Register</Label>
 
                   <div className="mt-5 flex items-center gap-4">
+
                     <div
                       className="
                         flex
@@ -1063,11 +1015,11 @@ export default function FavouriteLinksPage() {
                         justify-center
                         rounded-full
                         border
-                        border-blue-300/[0.18]
-                        bg-blue-400/[0.045]
+                        border-white/[0.09]
+                        bg-[#11161d]
                       "
                     >
-                      <Link2 className="h-4 w-4 text-blue-200/65" />
+                      <Link2 className="h-4 w-4 text-zinc-500" />
                     </div>
 
                     <span className="font-serif text-2xl text-white">
@@ -1075,13 +1027,16 @@ export default function FavouriteLinksPage() {
                         ? totalLinks
                         : filteredTotal}
                     </span>
+
                   </div>
 
                   <div className="my-10 h-px bg-white/[0.08]" />
 
                   <div className="space-y-7">
+
                     <div>
                       <Label>Classification</Label>
+
                       <p className="mt-2 font-serif text-sm text-zinc-300">
                         Three registers
                       </p>
@@ -1089,6 +1044,7 @@ export default function FavouriteLinksPage() {
 
                     <div>
                       <Label>Method</Label>
+
                       <p className="mt-2 font-serif text-sm text-zinc-300">
                         Manually curated
                       </p>
@@ -1096,12 +1052,15 @@ export default function FavouriteLinksPage() {
 
                     <div>
                       <Label>Principle</Label>
-                      <p className="mt-2 font-serif text-sm italic text-zinc-500">
+
+                      <p className="mt-2 font-serif text-sm italic text-zinc-600">
                         If it stayed in my head, it belongs here.
                       </p>
                     </div>
+
                   </div>
                 </aside>
+
               </div>
             </section>
 
@@ -1117,8 +1076,8 @@ export default function FavouriteLinksPage() {
                   flex-col
                   gap-4
                   border
-                  border-blue-200/[0.12]
-                  bg-[#111a25]
+                  border-white/[0.08]
+                  bg-[#11161d]
                   px-5
                   py-4
                   md:flex-row
@@ -1126,14 +1085,16 @@ export default function FavouriteLinksPage() {
                   md:justify-between
                 "
               >
+
                 <div className="flex items-center gap-3">
+
                   <span
                     className="
                       font-mono
                       text-[9px]
                       uppercase
                       tracking-[0.20em]
-                      text-blue-300/40
+                      text-zinc-600
                     "
                   >
                     Active filter
@@ -1147,32 +1108,31 @@ export default function FavouriteLinksPage() {
                       ? "entry"
                       : "entries"}
                   </span>
+
                 </div>
 
                 <button
+                  type="button"
                   onClick={() => selectTag("All")}
                   className="
                     inline-flex
                     w-fit
                     items-center
                     border
-                    border-white/[0.09]
-                    bg-[#171d25]
+                    border-white/[0.08]
+                    bg-[#0f141a]
                     px-4
                     py-2
                     font-mono
                     text-[9px]
                     uppercase
                     tracking-[0.15em]
-                    text-zinc-500
-                    transition-all
-                    hover:border-blue-200/[0.18]
-                    hover:bg-[#202936]
-                    hover:text-blue-100
+                    text-zinc-600
                   "
                 >
                   Clear filter
                 </button>
+
               </div>
             )}
 
@@ -1181,6 +1141,7 @@ export default function FavouriteLinksPage() {
                 ================================================= */}
 
             <section className="pt-24 md:pt-28">
+
               <SectionHeader
                 number="01"
                 title="Moving Pictures"
@@ -1188,6 +1149,7 @@ export default function FavouriteLinksPage() {
               />
 
               <div className="mt-8">
+
                 <Register
                   items={filteredVideos}
                   selectedTag={selectedTag}
@@ -1195,7 +1157,9 @@ export default function FavouriteLinksPage() {
                   emptyTitle="The projector is presently empty."
                   emptyText="Links to videos go here. No embedded players. No autoplay. No cinematic commitment. Just the link, the reason it survived, and the date upon which it was captured."
                 />
+
               </div>
+
             </section>
 
             {/* =================================================
@@ -1203,6 +1167,7 @@ export default function FavouriteLinksPage() {
                 ================================================= */}
 
             <section className="mt-28 md:mt-36">
+
               <SectionHeader
                 number="02"
                 title="Things Found"
@@ -1210,6 +1175,7 @@ export default function FavouriteLinksPage() {
               />
 
               <div className="mt-8">
+
                 <Register
                   items={filteredThingsFound}
                   selectedTag={selectedTag}
@@ -1217,7 +1183,9 @@ export default function FavouriteLinksPage() {
                   emptyTitle="The archive hath found nothing yet."
                   emptyText="Articles, essays, websites, blogs, strange pages, useful references, and other corners of the internet may be recorded here."
                 />
+
               </div>
+
             </section>
 
             {/* =================================================
@@ -1225,6 +1193,7 @@ export default function FavouriteLinksPage() {
                 ================================================= */}
 
             <section className="mt-28 md:mt-36">
+
               <SectionHeader
                 number="03"
                 title="Cultural Register"
@@ -1232,6 +1201,7 @@ export default function FavouriteLinksPage() {
               />
 
               <div className="mt-8">
+
                 <Register
                   items={filteredCultural}
                   selectedTag={selectedTag}
@@ -1244,7 +1214,9 @@ export default function FavouriteLinksPage() {
                   emptyTitle="The cultural cupboard remaineth open."
                   emptyText="Songs, albums, recipes, restaurants, films, books, photographs, food, traditions, and other things which do not fit comfortably into the intellectual registers."
                 />
+
               </div>
+
             </section>
 
             {/* =================================================
@@ -1255,6 +1227,7 @@ export default function FavouriteLinksPage() {
               id="tag-register"
               className="mt-28 scroll-mt-24 md:mt-36"
             >
+
               <SectionHeader
                 number="04"
                 title="Tag Register"
@@ -1265,16 +1238,17 @@ export default function FavouriteLinksPage() {
                 className="
                   mt-8
                   border
-                  border-blue-200/[0.10]
-                  bg-[#151b23]
+                  border-white/[0.08]
+                  bg-[#11161d]
                   p-8
-                  shadow-[0_15px_50px_rgba(0,0,0,0.18)]
                   md:p-10
                 "
               >
+
                 {/* INTRO */}
 
                 <div className="mb-8">
+
                   <Label>Classification system</Label>
 
                   <p
@@ -1288,28 +1262,17 @@ export default function FavouriteLinksPage() {
                     "
                   >
                     Choose a tag to filter the entire collection.
-                    The three registers are searched together.
-                  </p>
-
-                  <p
-                    className="
-                      mt-2
-                      font-serif
-                      text-sm
-                      italic
-                      text-zinc-600
-                    "
-                  >
-                    One vocabulary, three domains.
                   </p>
                 </div>
 
                 {/* FILTER BUTTONS */}
 
                 <div className="flex flex-wrap gap-2">
+
                   {/* ALL */}
 
                   <button
+                    type="button"
                     onClick={() => selectTag("All")}
                     className={`
                       inline-flex
@@ -1321,12 +1284,10 @@ export default function FavouriteLinksPage() {
                       text-[9px]
                       uppercase
                       tracking-[0.16em]
-                      transition-all
-                      duration-200
                       ${
                         selectedTag === "All"
-                          ? "border-blue-200/[0.30] bg-blue-400/[0.12] text-blue-100 shadow-[0_0_25px_rgba(100,160,220,0.08)]"
-                          : "border-white/[0.09] bg-[#1b222b] text-zinc-500 hover:border-blue-200/[0.18] hover:bg-[#202936] hover:text-blue-100"
+                          ? "border-white/[0.18] bg-[#1b222b] text-zinc-200"
+                          : "border-white/[0.08] bg-[#0f141a] text-zinc-600"
                       }
                     `}
                   >
@@ -1334,10 +1295,12 @@ export default function FavouriteLinksPage() {
                   </button>
 
                   {allTags.map((tag) => {
+
                     const active = selectedTag === tag
 
                     return (
                       <button
+                        type="button"
                         key={tag}
                         onClick={() => selectTag(tag)}
                         className={`
@@ -1350,12 +1313,10 @@ export default function FavouriteLinksPage() {
                           text-[9px]
                           uppercase
                           tracking-[0.16em]
-                          transition-all
-                          duration-200
                           ${
                             active
-                              ? "border-blue-200/[0.30] bg-blue-400/[0.12] text-blue-100 shadow-[0_0_25px_rgba(100,160,220,0.08)]"
-                              : "border-white/[0.09] bg-[#1b222b] text-zinc-500 hover:border-blue-200/[0.18] hover:bg-[#202936] hover:text-blue-100"
+                              ? "border-white/[0.18] bg-[#1b222b] text-zinc-200"
+                              : "border-white/[0.08] bg-[#0f141a] text-zinc-600"
                           }
                         `}
                       >
@@ -1363,6 +1324,7 @@ export default function FavouriteLinksPage() {
                       </button>
                     )
                   })}
+
                 </div>
 
                 {/* CURRENT FILTER */}
@@ -1375,8 +1337,11 @@ export default function FavouriteLinksPage() {
                     pt-7
                   "
                 >
+
                   <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+
                     <div>
+
                       <Label>Current view</Label>
 
                       <p className="mt-2 font-serif text-base text-zinc-300">
@@ -1384,6 +1349,7 @@ export default function FavouriteLinksPage() {
                           ? "The complete collection"
                           : `Everything tagged “${selectedTag}”`}
                       </p>
+
                     </div>
 
                     <span
@@ -1392,7 +1358,7 @@ export default function FavouriteLinksPage() {
                         text-[9px]
                         uppercase
                         tracking-[0.16em]
-                        text-blue-300/40
+                        text-zinc-600
                       "
                     >
                       {filteredTotal}{" "}
@@ -1401,7 +1367,9 @@ export default function FavouriteLinksPage() {
                         : "entries"}{" "}
                       found
                     </span>
+
                   </div>
+
                 </div>
 
                 {/* NOTE */}
@@ -1410,10 +1378,11 @@ export default function FavouriteLinksPage() {
                   className="
                     mt-8
                     border-l
-                    border-blue-300/[0.18]
+                    border-white/[0.10]
                     pl-6
                   "
                 >
+
                   <p
                     className="
                       font-serif
@@ -1441,15 +1410,19 @@ export default function FavouriteLinksPage() {
                     The classification system is therefore not
                     to be trusted completely.
                   </p>
+
                 </div>
+
               </div>
+
             </section>
 
             {/* =================================================
                 CLOSING
                 ================================================= */}
 
-            <section className="mt-28 md:mt-36">
+            {/* <section className="mt-28 md:mt-36">
+
               <div
                 className="
                   border-t
@@ -1457,6 +1430,7 @@ export default function FavouriteLinksPage() {
                   py-12
                 "
               >
+
                 <div
                   className="
                     flex
@@ -1467,7 +1441,9 @@ export default function FavouriteLinksPage() {
                     md:justify-between
                   "
                 >
+
                   <div>
+
                     <p
                       className="
                         font-serif
@@ -1490,6 +1466,7 @@ export default function FavouriteLinksPage() {
                       One link at a time, the internet is made
                       slightly less disposable.
                     </p>
+
                   </div>
 
                   <span
@@ -1498,14 +1475,18 @@ export default function FavouriteLinksPage() {
                       text-[9px]
                       uppercase
                       tracking-[0.25em]
-                      text-blue-300/35
+                      text-zinc-600
                     "
                   >
                     JADE · LINKS · 1806
                   </span>
+
                 </div>
+
               </div>
-            </section>
+
+            </section> */}
+
           </div>
         </div>
       </main>
