@@ -43,6 +43,8 @@ type LinkTag =
   | "Personal"
   | "Logic"
   | "Scientist"
+  | "Book"
+  | "Website"
 
 type FilterTag = LinkTag | "All"
 
@@ -95,7 +97,16 @@ const thingsFound: FavouriteLink[] = [
     tags: ["Personal", "Music", "Culture"],
     source: "YouTube",
   },
-
+  {
+    number: "012",
+    date: "13 · IX · 2026",
+    title: "Nice books from James Gleick (ISSAC NEWTON)",
+    caption:
+      "Website of James Gleick",
+    url: "https://around.com/category/books/",
+    tags: ["Book", "Website", "Scientist"],
+    source: "WebSurfing",
+  },
 ]
 
 const culturalRegister: FavouriteLink[] = [
