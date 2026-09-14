@@ -41,6 +41,12 @@ const mainItems = [
     icon: Link2,
   },
 
+  {
+    title: "Reading List",
+    url: "/rlist",
+    icon: BookOpen,
+  },
+
   //{
   //   title: "Mathematics",
   //   url: "/mathematics",
