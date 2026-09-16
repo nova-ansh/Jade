@@ -161,15 +161,102 @@ const gallery: GalleryItem[] = [
   },
   {
     id: 2,
-    title: "Leh, Ladakh, India",
+    title: "Jade (14 YO) Shanti Stupa, Leh, Ladakh, India",
     date: "27 · VI · 1799",
-    day: "Sunday",
+    day: "",
     year: 1799,
-    month: 8,
+    month: 6,
     image: "Ladakh.jpeg",
+    description:
+      "The Shanti Stupa in Leh, Ladakh is perched on a hill overlooking Leh. It was built in 1991 by Japanese Buddhist monk Gyomyo Nakamura, as part of the Peace Pagoda movement, and it contains Buddha relics at its base.",
+  },
+
+  {
+    id: 3,
+    title: "Dadi's 73rd Birthday",
+    date: "6 · VI · 1806",
+    day: "Saturday",
+    year: 1806,
+    month: 6,
+    image: "73rd_Birthday_Dadi_Dada.jpeg",
     description:
       "",
   },
+
+    {
+    id: 4,
+    title: "View from Old Cabin (L 551), TIET-Patiala, India",
+    date: "31 · VII · 1806",
+    day: "Friday",
+    year: 1806,
+    month: 7,
+    image: "View_Old_Cabin.jpeg",
+    description:
+      "",
+  },
+
+    {
+    id: 5,
+    title: "View from New Cabin (L 519), TIET-Patiala, India",
+    date: "6 · VIII · 1806",
+    day: "Thursday",
+    year: 1806,
+    month: 8,
+    image: "View_New_Cabin.jpeg",
+    description:
+      "",
+  },
+
+  {
+    id: 6,
+    title: "Dad at Kali Mata Mandir, Spituk Monastery, Western Leh, Ladakh, India",
+    date: "27 · VI · 1806",
+    day: "",
+    year: 1799,
+    month: 6,
+    image: "Dad_Western_Leh.jpeg",
+    description:
+      "Know more about the place here: https://sacredtemples.in/temple/kali-math-leh",
+  },
+
+  {
+    id: 7,
+    title: "Jade, his younger brother, his mother at Hemis Monastery, Karu, India",
+    date: "24 · VI · 1806",
+    day: "",
+    year: 1799,
+    month: 6,
+    image: "Fam_1_Leh.jpeg",
+    description:
+      "Hemis Monastery is also linked to a 19th-century controversy surrounding Nicolas Notovitch's claim of manuscripts describing Jesus (“Issa”) travelling through India and the Himalayas during his youth. To know more: Nicolas Notovitch & Documentary Film. To know more: https://en.wikipedia.org/wiki/Unknown_years_of_Jesus?#Nicolas_Notovich,_1887",
+  },
+
+  {
+    id: 8,
+    title: "Opened - CPU Box, bought in 1797",
+    date: "3 · III · 1806",
+    day: "",
+    year: 1806,
+    month: 3,
+    image: "PC_Home_Operation.jpeg",
+    description:
+      "Instructions reduced to Bits, Bits driven by Clocks"
+  },
+
+  {
+    id: 9,
+    title: "(20 yo) Working at the Field with Dad & Dada",
+    date: "7 · V · 1806",
+    day: "",
+    year: 1806,
+    month: 5,
+    image: "Field_Work.jpeg",
+    description:
+      ""
+  },
+  
+
+
   // {
   //   id: 3,
   //   title: "A day outside",
@@ -452,18 +539,6 @@ export default function PersonalPage() {
 
               <div className="max-w-5xl">
 
-                <div
-                  className="
-                    font-mono
-                    text-[10px]
-                    uppercase
-                    tracking-[0.30em]
-                    text-blue-300/55
-                  "
-                >
-                  Personal Information / 1806
-                </div>
-
                 <h1
                   className="
                     mt-7
@@ -507,7 +582,7 @@ export default function PersonalPage() {
               <SectionHeading
                 number="01"
                 title="Personal Information"
-                description="The ordinary facts, kept deliberately simple."
+                description=""
               />
 
               <div
@@ -643,7 +718,7 @@ export default function PersonalPage() {
               <SectionHeading
                 number="02"
                 title="Hobbies"
-                description="Things worth doing when the formal work is set aside."
+                description=""
               />
 
               <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
