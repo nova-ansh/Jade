@@ -86,19 +86,8 @@ const videos: FavouriteLink[] = [
 ]
 
 const thingsFound: FavouriteLink[] = [
-
   {
     number: "011",
-    date: "13 · IX · 2026",
-    title: "Tum Aapna Ranj O Gham, Aapni Pareeshani Mujhe by Sahir Ludhviani",
-    caption:
-      "Cover by Dr. Radhika Chopra",
-    url: "https://youtu.be/PmXOtVurWqg?si=H1fExAByy41atEAH",
-    tags: ["Personal", "Music", "Culture"],
-    source: "YouTube",
-  },
-  {
-    number: "012",
     date: "13 · IX · 2026",
     title: "Nice books from James Gleick (ISSAC NEWTON)",
     caption:
@@ -121,6 +110,50 @@ const culturalRegister: FavouriteLink[] = [
     tags: ["Culture", "Food", "Recipe"],
     source: "YouTube",
   },
+    {
+    number: "012",
+    date: "13 · IX · 2026",
+    title: "Tum Aapna Ranj O Gham, Aapni Pareeshani Mujhe by Sahir Ludhviani",
+    caption:
+      "Cover by Dr. Radhika Chopra",
+    url: "https://youtu.be/PmXOtVurWqg?si=H1fExAByy41atEAH",
+    tags: ["Music", "Culture"],
+    source: "YouTube",
+  },
+
+    {
+    number: "013",
+    date: "13 · IX · 2026",
+    title: "The best of Mozart (Classical)",
+    caption:
+      "Halidon Music Youtube Channel",
+    url: "https://youtu.be/Rb0UmrCXxVA",
+    tags: ["Music", "Culture"],
+    source: "YouTube",
+  },
+
+    {
+    number: "014",
+    date: "18 · IX · 2026",
+    title: "Weekend",
+    caption:
+      "LGBTQ+ Cinema · Intimacy & Desire",
+    url: "https://youtu.be/38TLEuWhxTU?si=lSNRM2XBe8bf20W2",
+    tags: ["Film", "Culture"],
+    source: "YouTube",
+  },
+
+    {
+    number: "015",
+    date: "18 · IX · 2026",
+    title: "Steps - 5, 6, 7, 8",
+    caption:
+      "Live from the Top of Pops, 1998",
+    url: "https://youtu.be/lDvnvVi9wTI?si=H6j7wrjLNIVLw4dN",
+    tags: ["Music", "Culture"],
+    source: "YouTube",
+  },
+  
 
 ]
 
