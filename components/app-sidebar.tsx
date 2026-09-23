@@ -47,6 +47,12 @@ const mainItems = [
     icon: BookOpen,
   },
 
+  {
+    title: "Examinations",
+    url: "/elist",
+    icon: GraduationCap,
+  },
+
   //{
   //   title: "Mathematics",
   //   url: "/mathematics",

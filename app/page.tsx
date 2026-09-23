@@ -452,8 +452,7 @@ export default function Home() {
                         md:text-[27px]
                       "
                     >
-                      TOD: One dream is dead, yet another is being born, as the seed
-                      comes out through the solid earth.
+                      TOD: Opportunities do not ask if you are ready, they ask if you are willing.
                     </p>
 
 
