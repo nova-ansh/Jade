@@ -153,6 +153,17 @@ const culturalRegister: FavouriteLink[] = [
     tags: ["Music", "Culture"],
     source: "YouTube",
   },
+
+  {
+    number: "016",
+    date: "23 · IX · 2026",
+    title: "Happy Bisexual Day!",
+    caption:
+      "Boy Bi, Writer & Singer: Mad Tsai",
+    url: "https://youtu.be/u3gfy-rVWHE",
+    tags: ["Music", "Culture"],
+    source: "YouTube",
+  },
   
 
 ]

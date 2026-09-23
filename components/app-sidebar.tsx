@@ -8,6 +8,7 @@ import {
   BookOpen,
   FolderOpen,
   Link2,
+  Pen
 } from "lucide-react"
 
 import {
@@ -51,6 +52,12 @@ const mainItems = [
     title: "Examinations",
     url: "/elist",
     icon: GraduationCap,
+  },
+
+    {
+    title: "Favourite Quotes",
+    url: "/qlist",
+    icon: Pen,
   },
 
   //{

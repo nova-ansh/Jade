@@ -1,5 +1,6 @@
 "use client"
 
+import type { ReactNode } from "react"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 
@@ -35,6 +36,7 @@ type ExaminationEntry = {
   rank: string
   percentile: string
   commentary: string
+  color: string
 }
 
 /* ============================================================
@@ -51,6 +53,7 @@ const examinations: ExaminationEntry[] = [
     rank: "—",
     percentile: "—",
     commentary: "",
+    color: "#f59e0b",
   },
 
   {
@@ -62,6 +65,7 @@ const examinations: ExaminationEntry[] = [
     rank: "—",
     percentile: "—",
     commentary: "",
+    color: "#22c55e",
   },
 
   {
@@ -73,6 +77,7 @@ const examinations: ExaminationEntry[] = [
     rank: "—",
     percentile: "—",
     commentary: "",
+    color: "#38bdf8",
   },
 
   {
@@ -84,6 +89,7 @@ const examinations: ExaminationEntry[] = [
     rank: "—",
     percentile: "—",
     commentary: "",
+    color: "#f472b6",
   },
 
   {
@@ -95,6 +101,7 @@ const examinations: ExaminationEntry[] = [
     rank: "—",
     percentile: "—",
     commentary: "",
+    color: "#a78bfa",
   },
 ]
 
@@ -108,6 +115,7 @@ function Status({ status }: { status: ExaminationStatus }) {
       className="
         inline-flex
         items-center
+        whitespace-nowrap
         border
         border-white/[0.08]
         bg-[#151b23]
@@ -118,7 +126,6 @@ function Status({ status }: { status: ExaminationStatus }) {
         uppercase
         tracking-[0.14em]
         text-blue-100/60
-        whitespace-nowrap
       "
     >
       {status}
@@ -130,7 +137,7 @@ function Status({ status }: { status: ExaminationStatus }) {
    SMALL LABEL
    ============================================================ */
 
-function Label({ children }: { children: React.ReactNode }) {
+function Label({ children }: { children: ReactNode }) {
   return (
     <span
       className="
@@ -155,7 +162,7 @@ export default function ExaminationsPage() {
     <SidebarProvider>
       <AppSidebar />
 
-      <main className="min-h-screen flex-1 bg-[#080b10] text-zinc-100">
+      <main className="min-h-screen min-w-0 flex-1 overflow-x-hidden bg-[#080b10] text-zinc-100">
 
         {/* ======================================================
             HEADER
@@ -174,6 +181,7 @@ export default function ExaminationsPage() {
         >
           <div
             className="
+              relative
               flex
               h-full
               items-center
@@ -220,6 +228,7 @@ export default function ExaminationsPage() {
 
             <div
               className="
+                pointer-events-none
                 absolute
                 left-1/2
                 hidden
@@ -241,14 +250,14 @@ export default function ExaminationsPage() {
                 Competitive Examinations
               </span>
 
-              <span className="status-dot h-2 w-2 rounded-full bg-blue-400" />
+              <span className="status-dot h-2 w-2 shrink-0 rounded-full bg-blue-400" />
 
               <span className="text-sm text-slate-600">
                 celebration of intellectual rigor
               </span>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="ml-auto flex items-center gap-4">
 
               <span
                 className="
@@ -273,7 +282,7 @@ export default function ExaminationsPage() {
             PAGE FIELD
             ====================================================== */}
 
-        <div className="relative">
+        <div className="relative min-w-0">
 
           {/* subtle mathematical grid */}
 
@@ -306,6 +315,7 @@ export default function ExaminationsPage() {
               mx-auto
               w-full
               max-w-[1500px]
+              min-w-0
               px-6
               pb-32
               md:px-10
@@ -372,7 +382,9 @@ export default function ExaminationsPage() {
 
               <div
                 className="
-                  overflow-x-auto
+                  w-full
+                  min-w-0
+                  overflow-hidden
                   border
                   border-white/[0.10]
                   bg-[#0d1218]
@@ -380,7 +392,18 @@ export default function ExaminationsPage() {
                 "
               >
 
-                <table className="w-full min-w-[1100px] border-collapse">
+                <table className="w-full table-fixed border-collapse">
+
+                  <colgroup>
+                    <col className="w-[7%]" />
+                    <col className="w-[25%]" />
+                    <col className="w-[9%]" />
+                    <col className="w-[14%]" />
+                    <col className="w-[11%]" />
+                    <col className="w-[11%]" />
+                    <col className="w-[11%]" />
+                    <col className="w-[12%]" />
+                  </colgroup>
 
                   {/* ==================================================
                       HEADER
@@ -398,8 +421,7 @@ export default function ExaminationsPage() {
 
                       <th
                         className="
-                          w-[70px]
-                          px-6
+                          px-3
                           py-5
                           text-left
                           font-mono
@@ -408,6 +430,7 @@ export default function ExaminationsPage() {
                           uppercase
                           tracking-[0.20em]
                           text-zinc-500
+                          md:px-4
                         "
                       >
                         No.
@@ -415,8 +438,7 @@ export default function ExaminationsPage() {
 
                       <th
                         className="
-                          min-w-[250px]
-                          px-5
+                          px-3
                           py-5
                           text-left
                           font-mono
@@ -425,6 +447,7 @@ export default function ExaminationsPage() {
                           uppercase
                           tracking-[0.20em]
                           text-zinc-500
+                          md:px-4
                         "
                       >
                         Examination
@@ -432,8 +455,7 @@ export default function ExaminationsPage() {
 
                       <th
                         className="
-                          w-[90px]
-                          px-5
+                          px-3
                           py-5
                           text-left
                           font-mono
@@ -442,6 +464,7 @@ export default function ExaminationsPage() {
                           uppercase
                           tracking-[0.20em]
                           text-zinc-500
+                          md:px-4
                         "
                       >
                         Year
@@ -449,8 +472,7 @@ export default function ExaminationsPage() {
 
                       <th
                         className="
-                          w-[140px]
-                          px-5
+                          px-3
                           py-5
                           text-left
                           font-mono
@@ -459,6 +481,7 @@ export default function ExaminationsPage() {
                           uppercase
                           tracking-[0.20em]
                           text-zinc-500
+                          md:px-4
                         "
                       >
                         Status
@@ -466,8 +489,7 @@ export default function ExaminationsPage() {
 
                       <th
                         className="
-                          w-[120px]
-                          px-5
+                          px-3
                           py-5
                           text-left
                           font-mono
@@ -476,6 +498,7 @@ export default function ExaminationsPage() {
                           uppercase
                           tracking-[0.20em]
                           text-zinc-500
+                          md:px-4
                         "
                       >
                         Score
@@ -483,8 +506,7 @@ export default function ExaminationsPage() {
 
                       <th
                         className="
-                          w-[120px]
-                          px-5
+                          px-3
                           py-5
                           text-left
                           font-mono
@@ -493,6 +515,7 @@ export default function ExaminationsPage() {
                           uppercase
                           tracking-[0.20em]
                           text-zinc-500
+                          md:px-4
                         "
                       >
                         Rank
@@ -500,8 +523,7 @@ export default function ExaminationsPage() {
 
                       <th
                         className="
-                          w-[130px]
-                          px-5
+                          px-3
                           py-5
                           text-left
                           font-mono
@@ -510,6 +532,7 @@ export default function ExaminationsPage() {
                           uppercase
                           tracking-[0.20em]
                           text-zinc-500
+                          md:px-4
                         "
                       >
                         Percentile
@@ -517,8 +540,7 @@ export default function ExaminationsPage() {
 
                       <th
                         className="
-                          min-w-[280px]
-                          px-6
+                          px-3
                           py-5
                           text-left
                           font-mono
@@ -527,6 +549,7 @@ export default function ExaminationsPage() {
                           uppercase
                           tracking-[0.20em]
                           text-zinc-500
+                          md:px-4
                         "
                       >
                         Commentary
@@ -560,34 +583,47 @@ export default function ExaminationsPage() {
 
                         <td
                           className="
-                            px-6
+                            px-3
                             py-8
                             align-top
+                            md:px-4
                           "
                         >
 
-                          <span
-                            className="
-                              inline-flex
-                              h-8
-                              min-w-8
-                              items-center
-                              justify-center
-                              border
-                              border-white/[0.10]
-                              bg-[#111820]
-                              px-2
-                              font-mono
-                              text-[9px]
-                              tracking-[0.08em]
-                              text-zinc-500
-                              transition-colors
-                              group-hover:border-blue-300/20
-                              group-hover:text-blue-200/70
-                            "
-                          >
-                            {exam.number}
-                          </span>
+                          <div className="flex items-start gap-2">
+
+                            <span
+                              className="mt-1 h-8 w-1 shrink-0"
+                              style={{
+                                backgroundColor: exam.color,
+                              }}
+                            />
+
+                            <span
+                              className="
+                                inline-flex
+                                h-8
+                                min-w-8
+                                shrink-0
+                                items-center
+                                justify-center
+                                border
+                                border-white/[0.10]
+                                bg-[#111820]
+                                px-2
+                                font-mono
+                                text-[9px]
+                                tracking-[0.08em]
+                                text-zinc-500
+                                transition-colors
+                                group-hover:border-white/[0.16]
+                                group-hover:text-zinc-300
+                              "
+                            >
+                              {exam.number}
+                            </span>
+
+                          </div>
 
                         </td>
 
@@ -595,13 +631,15 @@ export default function ExaminationsPage() {
 
                         <td
                           className="
-                            px-5
+                            min-w-0
+                            px-3
                             py-8
                             align-top
+                            md:px-4
                           "
                         >
 
-                          <div className="flex items-start gap-4">
+                          <div className="flex items-start gap-3">
 
                             <div
                               className="
@@ -615,17 +653,19 @@ export default function ExaminationsPage() {
                               "
                             />
 
-                            <div>
+                            <div className="min-w-0">
 
                               <p
                                 className="
+                                  break-words
                                   font-serif
-                                  text-[21px]
+                                  text-[18px]
                                   leading-tight
                                   tracking-[-0.02em]
                                   text-zinc-100
                                   transition-colors
                                   group-hover:text-white
+                                  md:text-[21px]
                                 "
                               >
                                 {exam.examination}
@@ -654,18 +694,20 @@ export default function ExaminationsPage() {
 
                         <td
                           className="
-                            px-5
+                            px-3
                             py-8
                             align-top
+                            md:px-4
                           "
                         >
 
                           <span
                             className="
                               font-mono
-                              text-[11px]
+                              text-[10px]
                               tracking-[0.10em]
                               text-zinc-400
+                              md:text-[11px]
                             "
                           >
                             {exam.year}
@@ -677,30 +719,35 @@ export default function ExaminationsPage() {
 
                         <td
                           className="
-                            px-5
+                            px-3
                             py-8
                             align-top
+                            md:px-4
                           "
                         >
+
                           <Status status={exam.status} />
+
                         </td>
 
                         {/* SCORE */}
 
                         <td
                           className="
-                            px-5
+                            px-3
                             py-8
                             align-top
+                            md:px-4
                           "
                         >
 
                           <span
                             className="
                               font-mono
-                              text-[11px]
+                              text-[10px]
                               tracking-[0.08em]
                               text-zinc-400
+                              md:text-[11px]
                             "
                           >
                             {exam.score}
@@ -712,18 +759,20 @@ export default function ExaminationsPage() {
 
                         <td
                           className="
-                            px-5
+                            px-3
                             py-8
                             align-top
+                            md:px-4
                           "
                         >
 
                           <span
                             className="
                               font-mono
-                              text-[11px]
+                              text-[10px]
                               tracking-[0.08em]
                               text-zinc-400
+                              md:text-[11px]
                             "
                           >
                             {exam.rank}
@@ -735,18 +784,20 @@ export default function ExaminationsPage() {
 
                         <td
                           className="
-                            px-5
+                            px-3
                             py-8
                             align-top
+                            md:px-4
                           "
                         >
 
                           <span
                             className="
                               font-mono
-                              text-[11px]
+                              text-[10px]
                               tracking-[0.08em]
                               text-zinc-400
+                              md:text-[11px]
                             "
                           >
                             {exam.percentile}
@@ -758,9 +809,11 @@ export default function ExaminationsPage() {
 
                         <td
                           className="
-                            px-6
+                            min-w-0
+                            px-3
                             py-8
                             align-top
+                            md:px-4
                           "
                         >
 
@@ -768,7 +821,9 @@ export default function ExaminationsPage() {
 
                             <p
                               className="
-                                max-w-[360px]
+                                max-w-full
+                                break-words
+                                whitespace-normal
                                 font-serif
                                 text-[14px]
                                 leading-6
