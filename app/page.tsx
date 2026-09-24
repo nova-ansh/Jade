@@ -452,7 +452,7 @@ export default function Home() {
                         md:text-[27px]
                       "
                     >
-                      TOD: Opportunities do not ask if you are ready, they ask if you are willing.
+                      TOD: Only (99) days are left in 2026 - what are you waiting for? Go, fulfill yout New Year Resolutions that you made (266) days ago. Still time.
                     </p>
 
 
