@@ -44,8 +44,20 @@ type ExaminationEntry = {
    ============================================================ */
 
 const examinations: ExaminationEntry[] = [
-  {
+   {
     number: "001",
+    examination: "NPTEL / IIT Ropar",
+    year: "2027", 
+    status: "Scheduled",
+    score: "—",
+    rank: "—",
+    percentile: "—",
+    commentary: "Course is under progress at Week 10/12. The exam is scheduled on 16th of October, 2026.",
+    color: "#4F6B8A",
+  },
+
+  {
+    number: "002",
     examination: "GATE CS/IT",
     year: "2027",
     status: "Preparing",
@@ -57,7 +69,7 @@ const examinations: ExaminationEntry[] = [
   },
 
   {
-    number: "002",
+    number: "003",
     examination: "CMI Entrance Examination",
     year: "2027",
     status: "Preparing",
@@ -69,7 +81,7 @@ const examinations: ExaminationEntry[] = [
   },
 
   {
-    number: "003",
+    number: "004",
     examination: "ISI Admission Test",
     year: "2027",
     status: "Preparing",
@@ -81,7 +93,7 @@ const examinations: ExaminationEntry[] = [
   },
 
   {
-    number: "004",
+    number: "005",
     examination: "JEST",
     year: "2027",
     status: "Preparing",
@@ -93,7 +105,7 @@ const examinations: ExaminationEntry[] = [
   },
 
   {
-    number: "005",
+    number: "006",
     examination: "TIFR Entrance Examination",
     year: "2027",
     status: "Preparing",
