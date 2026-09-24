@@ -279,6 +279,18 @@ const gallery: GalleryItem[] = [
       ""
   },
 
+     {
+    id: 12,
+    title: "When he (brother) was leaving for Chandigarh.",
+    date: "20 · VI · 1799",
+    day: "",
+    year: 1799,
+    month: 6,
+    image: "brother.png",
+    description:
+      ""
+  },
+
 
   // {
   //   id: 3,
