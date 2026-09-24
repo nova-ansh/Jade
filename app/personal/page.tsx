@@ -255,6 +255,29 @@ const gallery: GalleryItem[] = [
       ""
   },
   
+   {
+    id: 10,
+    title: "When I hosted LGBT Meet at Chai Nagri, COS, TIET-Patiala",
+    date: "12 · V · 1804",
+    day: "",
+    year: 1804,
+    month: 5,
+    image: "LGBT-Meet_Chai-Nagri.jpg",
+    description:
+      ""
+  },
+
+   {
+    id: 11,
+    title: "Kay & Jay",
+    date: "19 · V · 1804",
+    day: "",
+    year: 1804,
+    month: 5,
+    image: "Kay_Jay.jpg",
+    description:
+      ""
+  },
 
 
   // {
