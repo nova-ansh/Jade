@@ -452,9 +452,8 @@ export default function Home() {
                         md:text-[27px]
                       "
                     >
-                      TOD: Only (99) days are left in 2026 - what are you waiting for? Go, fulfill your New Year Resolutions that you made (266) days ago. Still time.
+                      TOD: They say in Northern Italia - "During Summers we wait for it to end and during Winters we wait for Summers to Arrive!"
                     </p>
-
 
                     <div className="mt-10 flex items-center gap-4">
 

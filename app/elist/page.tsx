@@ -108,11 +108,11 @@ const examinations: ExaminationEntry[] = [
     number: "006",
     examination: "TIFR Entrance Examination",
     year: "2027",
-    status: "Preparing",
+    status: "Scheduled",
     score: "—",
     rank: "—",
     percentile: "—",
-    commentary: "",
+    commentary: "The exam is scheduled on 13 December, 2026 for Integrated PhD at TIFR Bombay.",
     color: "#a78bfa",
   },
 ]
