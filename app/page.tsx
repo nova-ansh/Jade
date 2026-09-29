@@ -452,7 +452,7 @@ export default function Home() {
                         md:text-[27px]
                       "
                     >
-                      TOD: They say in Northern Italia - "During Summers we wait for it to end and during Winters we wait for Summers to Arrive!"
+                      TOD:Sometimes it's all just in your head.
                     </p>
 
                     <div className="mt-10 flex items-center gap-4">
