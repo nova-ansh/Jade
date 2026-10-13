@@ -48,42 +48,32 @@ const mainItems = [
     icon: BookOpen,
   },
 
-  {
-    title: "Examinations",
-    url: "/elist",
-    icon: GraduationCap,
-  },
-
-    {
-    title: "Favourite Quotes",
-    url: "/qlist",
-    icon: Pen,
-  },
-
-  //{
-  //   title: "Mathematics",
-  //   url: "/mathematics",
-  //   icon: Sigma,
-  // },
   // {
-  //   title: "Computer Science",
-  //   url: "/computer-science",
-  //   icon: Network,
-  //},
+  //   title: "Examinations",
+  //   url: "/elist",
+  //   icon: GraduationCap,
+  // },
+
+  //   {
+  //   title: "Favourite Quotes",
+  //   url: "/qlist",
+  //   icon: Pen,
+  // },
+
 ]
 
 const workspaceItems = [
 
-  {
-    title: "Research",
-    url: "/research",
-    icon: FlaskConical,
-  },
-  {
-    title: "Teaching",
-    url: "/teaching",
-    icon: GraduationCap,
-  },
+  // {
+  //   title: "Research",
+  //   url: "/research",
+  //   icon: FlaskConical,
+  // },
+  // {
+  //   title: "Teaching",
+  //   url: "/teaching",
+  //   icon: GraduationCap,
+  // },
   {
     title: "Diary",
     url: "/diary",

@@ -29,35 +29,125 @@ const whiteboards = [
 
 
 /* ============================================================
-   DATE
+   SYMPOSION LECTURES
+
+   To add or change a lecture, edit this list only.
+
+   - date        : ISO format (YYYY-MM-DD). The weekday is derived
+                   from it, so the weekday can never disagree with
+                   the date.
+   - description : optional. Leave it out (or set it to undefined)
+                   and the card shows "Details to be announced."
    ============================================================ */
 
-function getNotebookDate() {
-  const date = new Date()
+type Lecture = {
+  week: string
+  date: string
+  speaker: string
+  topic: string
+  description?: string
+  symbol: string
+}
 
-  const romanMonths = [
-    "I",
-    "II",
-    "III",
-    "IV",
-    "V",
-    "VI",
-    "VII",
-    "VIII",
-    "IX",
-    "X",
-    "XI",
-    "XII",
-  ]
+const lectures: Lecture[] = [
+  {
+    week: "Week 43 · Day 01",
+    date: "2026-10-24",
+    speaker: "Jade",
+    topic: "Asymptotic Analysis - Class 1",
+    description:
+      "Why algorithms are measured by growth rather than by seconds. The definitions of O, Ω and Θ built from first principles, with the quantifiers handled carefully, and the usual mistakes made when comparing functions.",
+    symbol: "i",
+  },
+  {
+    week: "Week 43 · Day 02",
+    date: "2026-10-25",
+    speaker: "Jade",
+    topic: "Asymptotic Analysis - Class 2",
+    description:
+      "Putting the definitions to work: the standard hierarchy of growth rates proved rather than recited, solving recurrences by substitution and recursion trees, and the Master theorem with its limits.",
+    symbol: "Δ",
+  },
+  {
+    week: "Week 43 · Day 03",
+    date: "2026-10-26",
+    speaker: "Jade",
+    topic: "Operating Systems",
+    description:
+      "The operating system as a manager of shared resources: processes and threads, scheduling, synchronisation and deadlock, with the reasoning behind each design rather than a catalogue of definitions.",
+    symbol: "ε",
+  },
+]
 
-  return `${date.getDate()} · ${romanMonths[date.getMonth()]} · 1806`
+
+/* ============================================================
+   DATE HELPERS
+   ============================================================ */
+
+const ROMAN_MONTHS = [
+  "I",
+  "II",
+  "III",
+  "IV",
+  "V",
+  "VI",
+  "VII",
+  "VIII",
+  "IX",
+  "X",
+  "XI",
+  "XII",
+]
+
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+]
+
+const WEEKDAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+]
+
+
+function getNotebookDate(date: Date) {
+  return `${date.getDate()} · ${ROMAN_MONTHS[date.getMonth()]} · 1806`
 }
 
 
-function getDayName() {
-  return new Intl.DateTimeFormat("en-US", {
-    weekday: "long",
-  }).format(new Date())
+/* "2026-10-24" -> "Saturday, 24 October, 2026" (timezone-proof) */
+function formatLectureDate(iso: string) {
+  const [year, month, day] = iso.split("-").map(Number)
+  const date = new Date(Date.UTC(year, month - 1, day))
+
+  return `${WEEKDAYS[date.getUTCDay()]}, ${date.getUTCDate()} ${
+    MONTHS[date.getUTCMonth()]
+  }, ${date.getUTCFullYear()}`
+}
+
+
+/* Local calendar day as "YYYY-MM-DD" */
+function toLocalISO(date: Date) {
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, "0")
+  const d = String(date.getDate()).padStart(2, "0")
+
+  return `${y}-${m}-${d}`
 }
 
 
@@ -70,16 +160,40 @@ export default function Home() {
   const [currentBoard, setCurrentBoard] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
+  /* Filled in after mount so the server and the browser never
+     disagree about "today" (avoids hydration warnings). */
+  const [notebookDate, setNotebookDate] = useState("")
+  const [today, setToday] = useState<string | null>(null)
+
+
+  useEffect(() => {
+
+    const now = new Date()
+
+    setNotebookDate(getNotebookDate(now))
+    setToday(toLocalISO(now))
+
+  }, [])
+
 
   /* ----------------------------------------------------------
      WHITEBOARD ROTATION
+     Restarts after every change, so clicking a dot always gives
+     the full six seconds. Respects reduced-motion settings.
      ---------------------------------------------------------- */
 
   useEffect(() => {
 
     if (isPaused) return
 
-    const interval = setInterval(() => {
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return
+    }
+
+    const timeout = setTimeout(() => {
 
       setCurrentBoard(
         (prev) => (prev + 1) % whiteboards.length
@@ -87,9 +201,9 @@ export default function Home() {
 
     }, 6000)
 
-    return () => clearInterval(interval)
+    return () => clearTimeout(timeout)
 
-  }, [isPaused])
+  }, [isPaused, currentBoard])
 
 
   return (
@@ -105,11 +219,14 @@ export default function Home() {
         <AppSidebar />
 
 
-        <main className="min-h-screen flex-1 bg-[#080b10] text-zinc-100">
+        <main className="min-h-screen min-w-0 flex-1 bg-[#080b10] text-zinc-100">
 
 
           {/* ====================================================
               STICKY TOP HEADER
+
+              Three-column grid from lg upwards, so the centre
+              text can never collide with the left or right groups.
               ==================================================== */}
 
           <header
@@ -131,8 +248,11 @@ export default function Home() {
                 h-full
                 items-center
                 justify-between
+                gap-4
                 px-5
                 md:px-7
+                lg:grid
+                lg:grid-cols-[1fr_auto_1fr]
               "
             >
 
@@ -190,10 +310,8 @@ export default function Home() {
 
               <div
                 className="
-                  absolute
-                  left-1/2
                   hidden
-                  -translate-x-1/2
+                  min-w-0
                   items-center
                   gap-3
                   lg:flex
@@ -202,6 +320,7 @@ export default function Home() {
 
                 <span
                   className="
+                    shrink-0
                     font-mono
                     text-[9px]
                     uppercase
@@ -212,18 +331,19 @@ export default function Home() {
                   Present inquiry
                 </span>
 
-                <span className="status-dot h-2 w-2 rounded-full bg-blue-400" />
+                <span className="status-dot h-2 w-2 shrink-0 rounded-full bg-blue-400" />
 
                 <span
                   className="
-                    max-w-[390px]
                     truncate
                     font-serif
                     text-sm
                     text-slate-400
+                    lg:max-w-[220px]
+                    xl:max-w-[390px]
                   "
                 >
-                  A new dream is being born!
+                  Voglio il primo posto, Andiamo!
                 </span>
 
               </div>
@@ -231,22 +351,23 @@ export default function Home() {
 
               {/* RIGHT */}
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 lg:justify-self-end">
 
                 <span
                   className="
                     hidden
+                    whitespace-nowrap
                     text-[10px]
                     uppercase
                     tracking-[0.16em]
                     text-slate-600
-                    md:block
+                    2xl:block
                   "
                 >
                   Mathematics · CS · Research
                 </span>
 
-                <div className="hidden h-5 w-px bg-blue-200/[0.08] md:block" />
+                <div className="hidden h-5 w-px bg-blue-200/[0.08] 2xl:block" />
 
                 <span
                   className="
@@ -283,18 +404,7 @@ export default function Home() {
                 opacity-[0.035]
               "
               style={{
-                backgroundImage:
-                  `
-                  linear-gradient(
-                    rgba(255,255,255,1) 1px,
-                    transparent 1px
-                  ),
-                  linear-gradient(
-                    90deg,
-                    rgba(255,255,255,1) 1px,
-                    transparent 1px
-                  )
-                  `,
+                backgroundImage: `None`,
                 backgroundSize: "48px 48px",
               }}
             />
@@ -314,197 +424,149 @@ export default function Home() {
             >
 
 
-              {/* =================================================
-                  FRONTISPIECE
-                  ================================================= */}
+{/* =================================================
+    FRONTISPIECE
+    ================================================= */}
 
-              <section
-                className="
-                  flex
-                  min-h-[650px]
-                  flex-col
-                  justify-center
-                  border-b
-                  border-white/[0.08]
-                  py-24
-                "
-              >
+<section
+  className="
+    flex
+    min-h-[560px]
+    flex-col
+    justify-center
+    border-b
+    border-white/[0.08]
+    pt-12
+    pb-16
+  "
+>
+  <div
+    className="
+      grid
+      items-center
+      gap-10
+      lg:grid-cols-[260px_minmax(0,1fr)]
+      xl:gap-14
+    "
+  >
+    {/* PORTRAIT — LEFTMOST */}
 
-                <div
-                  className="
-                    grid
-                    gap-10
-                    lg:grid-cols-[260px_minmax(0,1fr)]
-                    lg:items-center
-                  "
-                >
+    <div className="w-full max-w-[260px]">
+      <div
+        className="
+          relative
+          aspect-[4/5]
+          overflow-hidden
+          border
+          border-white/[0.12]
+          bg-[#15191f]
+        "
+      >
+        <img
+          src="/jade.jpeg"
+          alt="Jade"
+          className="
+            block
+            h-full
+            w-full
+            object-cover
+            object-center
+            opacity-[0.94]
+          "
+        />
 
-                  {/* PORTRAIT */}
+        <div
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            bg-gradient-to-t
+            from-black/35
+            via-transparent
+            to-black/[0.04]
+          "
+        />
+      </div>
+    </div>
 
-                  <div
-                    className="
-                      w-full
-                      max-w-[260px]
-                    "
-                  >
+    {/* TITLE, TOD & INSTITUTION — TO THE RIGHT */}
 
-                    <div
-                      className="
-                        relative
-                        aspect-[4/5]
-                        overflow-hidden
-                        border
-                        border-white/[0.12]
-                        bg-[#15191f]
-                      "
-                    >
+    <div className="min-w-0">
+      <h1
+        className="
+          mt-8
+          font-serif
+          text-[92px]
+          leading-[0.80]
+          tracking-[-0.065em]
+          text-white
+          md:text-[135px]
+          xl:text-[165px]
+        "
+      >
+        Jade.
+      </h1>
 
-                      <img
-                        src="/jade.jpeg"
-                        alt="Jade"
-                        className="
-                          block
-                          h-full
-                          w-full
-                          object-cover
-                          object-center
-                          opacity-[0.94]
-                        "
-                      />
+      {/* THOUGHT OF THE DAY */}
 
-                      <div
-                        className="
-                          pointer-events-none
-                          absolute
-                          inset-0
-                          bg-gradient-to-t
-                          from-black/35
-                          via-transparent
-                          to-black/[0.04]
-                        "
-                      />
+      <div className="mt-12 max-w-4xl">
+        <p
+          className="
+            font-mono
+            text-[10px]
+            uppercase
+            tracking-[0.30em]
+            text-blue-300/55
+          "
+        >
+          Thought of the Day!
+        </p>
 
-                    </div>
+        <blockquote
+          className="
+            mt-4
+            border-l
+            border-blue-300/30
+            pl-6
+          "
+        >
+          <p
+            className="
+              font-serif
+              text-[22px]
+              leading-[1.55]
+              text-zinc-200
+              md:text-[27px]
+            "
+          >
+            Analysis &amp; Natural Philosophy owe their most
+            important discoveries to this fruitful means,
+            which is called Induction.
+          </p>
 
-
-                    <div className="mt-4 flex items-center gap-3">
-
-                      <span className="h-px w-8 bg-blue-300/30" />
-
-                      <span
-                        className="
-                          font-mono
-                          text-[9px]
-                          uppercase
-                          tracking-[0.20em]
-                          text-zinc-600
-                        "
-                      >
-                        Jade · 1806
-                      </span>
-
-                    </div>
-
-                  </div>
-
-
-                  {/* TITLE / RECORD */}
-
-                  <div>
-
-                    <p
-                      className="
-                        font-mono
-                        text-[10px]
-                        uppercase
-                        tracking-[0.30em]
-                        text-blue-300/55
-                      "
-                    >
-                      Mathematics · Computer Science · Research
-                    </p>
-
-
-                    <h1
-                      className="
-                        mt-8
-                        font-serif
-                        text-[92px]
-                        leading-[0.80]
-                        tracking-[-0.065em]
-                        text-white
-                        md:text-[135px]
-                        lg:text-[165px]
-                      "
-                    >
-                      Jade.
-                    </h1>
-
-
-                    <p
-                      className="
-                        mt-12
-                        max-w-4xl
-                        font-serif
-                        text-[22px]
-                        leading-[1.55]
-                        text-zinc-200
-                        md:text-[27px]
-                      "
-                    >
-                      TOD:Sometimes it's all just in your head.
-                    </p>
-
-                    <div className="mt-10 flex items-center gap-4">
-
-                      <span className="h-px w-12 bg-blue-300/35" />
-
-                      <p
-                        className="
-                          font-serif
-                          text-sm
-                          italic
-                          text-zinc-500
-                        "
-                      >
-                        Thapar Institute of Engineering & Technology,
-                        Patiala
-                      </p>
-
-                    </div>
-
-
-                    {/* SMALL INDEX */}
-
-                    <div className="mt-14 flex flex-wrap gap-3">
-
-                      <IndexPill>
-                        Mathematics
-                      </IndexPill>
-
-                      <IndexPill>
-                        Computer Science
-                      </IndexPill>
-
-                      <IndexPill>
-                        Research
-                      </IndexPill>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </section>
-
-
+          <footer
+            className="
+              mt-4
+              font-serif
+              text-sm
+              italic
+              text-zinc-500
+            "
+          >
+            — Pierre-Simon Laplace, A Philosophical Essay
+            on Probabilities (1814)
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
 
               {/* =================================================
                   WHITEBOARD NOTEBOOK
                   ================================================= */}
 
-              <section className="mt-28 md:mt-36">
+              <section className="">
 
 
                 <SectionHeader
@@ -520,35 +582,50 @@ export default function Home() {
                     className="group"
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
+                    onFocus={() => setIsPaused(true)}
+                    onBlur={() => setIsPaused(false)}
                   >
 
                     <div
                       className="
                         relative
+                        h-[350px]
                         overflow-hidden
                         border
                         border-white/[0.10]
                         bg-[#15191f]
+                        md:h-[600px]
                       "
                     >
 
-                      <img
-                        key={currentBoard}
-                        src={whiteboards[currentBoard]}
-                        alt={`Whiteboard ${currentBoard + 1}`}
-                        className="
-                          block
-                          h-[350px]
-                          w-full
-                          object-cover
-                          object-center
-                          opacity-[0.92]
-                          transition-opacity
-                          duration-700
-                          group-hover:opacity-100
-                          md:h-[600px]
-                        "
-                      />
+                      {/* All boards stacked; the active one fades in. */}
+
+                      {whiteboards.map((src, index) => (
+
+                        <img
+                          key={src}
+                          src={src}
+                          alt={`Whiteboard ${index + 1}`}
+                          aria-hidden={currentBoard !== index}
+                          className={`
+                            absolute
+                            inset-0
+                            block
+                            h-full
+                            w-full
+                            object-cover
+                            object-center
+                            transition-opacity
+                            duration-700
+                            ${
+                              currentBoard === index
+                                ? "opacity-[0.92] group-hover:opacity-100"
+                                : "opacity-0"
+                            }
+                          `}
+                        />
+
+                      ))}
 
 
                       <div
@@ -567,6 +644,7 @@ export default function Home() {
                       {/* MARK */}
 
                       <span
+                        aria-hidden="true"
                         className="
                           absolute
                           right-6
@@ -630,6 +708,7 @@ export default function Home() {
                             key={index}
                             onClick={() => setCurrentBoard(index)}
                             aria-label={`Show whiteboard ${index + 1}`}
+                            aria-current={currentBoard === index}
                             className={`
                               h-1.5
                               rounded-full
@@ -694,13 +773,14 @@ export default function Home() {
 
                       <span
                         className="
+                          min-h-[1em]
                           font-mono
                           text-[9px]
                           tracking-[0.14em]
                           text-zinc-600
                         "
                       >
-                        {getNotebookDate()}
+                        {notebookDate}
                       </span>
 
                     </div>
@@ -731,35 +811,24 @@ export default function Home() {
                     mt-8
                     grid
                     gap-5
-                    md:grid-cols-3
+                    grid-cols-[repeat(auto-fit,minmax(280px,1fr))]
                   "
                 >
 
-                  <SymposionDay
-                    number="Week 37 · Day 01"
-                    title="Saturday, 12 September, 2026"
-                    speaker="Jade"
-                    topics="C Programming, Class IV"
-                    symbol="i"
-                  />
+                  {lectures.map((lecture) => (
 
+                    <SymposionDay
+                      key={lecture.date}
+                      week={lecture.week}
+                      date={lecture.date}
+                      speaker={lecture.speaker}
+                      topic={lecture.topic}
+                      description={lecture.description}
+                      symbol={lecture.symbol}
+                      today={today}
+                    />
 
-                  <SymposionDay
-                    number="Week 37 · Day 02"
-                    title="Sunday, 13 September, 2026"
-                    speaker="Jade"
-                    topics="Enumerative Combinatorics"
-                    symbol="Δ"
-                  />
-
-
-                  <SymposionDay
-                    number="Week 37 · Day 03"
-                    title="Monday, 14 September, 2026"
-                    speaker="Jade"
-                    topics="Database Theory"
-                    symbol="ε"
-                  />
+                  ))}
 
                 </div>
 
@@ -785,7 +854,7 @@ export default function Home() {
                     mt-8
                     grid
                     gap-5
-                    md:grid-cols-3
+                    grid-cols-[repeat(auto-fit,minmax(300px,1fr))]
                   "
                 >
 
@@ -825,7 +894,7 @@ export default function Home() {
               <section className="mt-28 md:mt-36">
 
                 <SectionHeader
-                  number="05"
+                  number="04"
                   title="What am I doin' these days?"
                   meta="a glimpse into ideas"
                 />
@@ -834,7 +903,7 @@ export default function Home() {
                 <div className="mt-8 space-y-5">
 
                   <Work
-                    number="03"
+                    number="01"
                     title="Teaching"
                     type="Academia"
                     description="I host Symposion — a lecture series on weekends at TSLAS (Thapar School of Liberal Arts & Sciences), TIET Patiala, Patiala, India. It allows students as well as me to question aspects of Mathematics and Computing beyond the coursework."
@@ -842,7 +911,7 @@ export default function Home() {
 
 
                   <Work
-                    number="01"
+                    number="02"
                     title="Celebration of Intellectual Rigor"
                     type="Examinations"
                     description="An ongoing study of mathematics, theoretical computer science, and their foundations through preparation for theoretical CS examinations in India."
@@ -850,7 +919,7 @@ export default function Home() {
 
 
                   <Work
-                    number="02"
+                    number="03"
                     title="Mathematical Notes"
                     type="Foundations"
                     description="Proofs, constructions, questions, counterexamples, and things worth understanding properly."
@@ -1006,6 +1075,7 @@ function SectionHeader({
           md:flex-row
           md:items-center
           md:justify-between
+          md:gap-10
         "
       >
 
@@ -1054,9 +1124,12 @@ function SectionHeader({
             font-mono
             text-[9px]
             uppercase
+            leading-relaxed
             tracking-[0.20em]
             text-blue-300/50
+            md:max-w-sm
             md:pl-0
+            md:text-right
           "
         >
           {meta}
@@ -1076,18 +1149,40 @@ function SectionHeader({
    ============================================================ */
 
 function SymposionDay({
-  number,
-  title,
+  week,
+  date,
   speaker,
-  topics,
+  topic,
+  description,
   symbol,
+  today,
 }: {
-  number: string
-  title: string
+  week: string
+  date: string
   speaker: string
-  topics: string
+  topic: string
+  description?: string
   symbol: string
+  today: string | null
 }) {
+
+  /* Status is known only after mount (see Home). */
+
+  const status =
+    today === null
+      ? null
+      : date === today
+        ? "Today"
+        : date > today
+          ? "Upcoming"
+          : "Concluded"
+
+  const statusColour =
+    status === "Concluded"
+      ? "text-zinc-600"
+      : status === "Today"
+        ? "text-blue-200"
+        : "text-blue-300/70"
 
   return (
 
@@ -1096,7 +1191,7 @@ function SymposionDay({
         group
         relative
         flex
-        min-h-[320px]
+        min-h-[360px]
         flex-col
         border
         border-white/[0.085]
@@ -1112,6 +1207,7 @@ function SymposionDay({
       {/* BACKGROUND INDEX */}
 
       <span
+        aria-hidden="true"
         className="
           pointer-events-none
           absolute
@@ -1138,7 +1234,7 @@ function SymposionDay({
           text-blue-300/60
         "
       >
-        {number}
+        {week}
       </span>
 
 
@@ -1155,51 +1251,95 @@ function SymposionDay({
           text-white
         "
       >
-        {title}
+        {formatLectureDate(date)}
       </h3>
 
 
-      {/* SPEAKER */}
+      {/* SPEAKER + TOPIC */}
 
-      <div className="relative mt-8">
+      <div className="relative mt-8 grid grid-cols-[auto_minmax(0,1fr)] gap-x-8 gap-y-6">
 
-        <Label>
-          Speaker
-        </Label>
+        <div>
 
-        <p
-          className="
-            mt-2
-            font-serif
-            text-sm
-            text-zinc-300
-          "
-        >
-          {speaker}
-        </p>
+          <Label>
+            Speaker
+          </Label>
+
+          <p
+            className="
+              mt-2
+              font-serif
+              text-sm
+              text-zinc-300
+            "
+          >
+            {speaker}
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <Label>
+            Topic
+          </Label>
+
+          <p
+            className="
+              mt-2
+              font-serif
+              text-sm
+              leading-6
+              text-zinc-300
+            "
+          >
+            {topic}
+          </p>
+
+        </div>
 
       </div>
 
 
-      {/* TOPICS */}
+      {/* DESCRIPTION */}
 
-      <div className="relative mt-6">
+      <div className="relative mt-6 border-t border-white/[0.06] pt-6">
 
         <Label>
-          Topic
+          About the lecture
         </Label>
 
-        <p
-          className="
-            mt-2
-            font-serif
-            text-sm
-            leading-6
-            text-zinc-400
-          "
-        >
-          {topics}
-        </p>
+        {description ? (
+
+          <p
+            className="
+              mt-2
+              font-serif
+              text-sm
+              leading-7
+              text-zinc-400
+            "
+          >
+            {description}
+          </p>
+
+        ) : (
+
+          <p
+            className="
+              mt-2
+              font-serif
+              text-sm
+              italic
+              leading-7
+              text-zinc-600
+            "
+          >
+            Details to be announced.
+          </p>
+
+        )}
 
       </div>
 
@@ -1227,6 +1367,7 @@ function SymposionDay({
           className="
             h-px
             w-7
+            shrink-0
             bg-zinc-700
             transition-colors
             duration-300
@@ -1237,6 +1378,23 @@ function SymposionDay({
         <span>
           Whiteboard session
         </span>
+
+        {status && (
+
+          <span
+            className={`
+              ml-auto
+              font-mono
+              text-[9px]
+              uppercase
+              tracking-[0.18em]
+              ${statusColour}
+            `}
+          >
+            {status}
+          </span>
+
+        )}
 
       </div>
 
@@ -1286,6 +1444,7 @@ function Interest({
       {/* MARK */}
 
       <span
+        aria-hidden="true"
         className="
           pointer-events-none
           absolute
@@ -1368,6 +1527,7 @@ function Interest({
           className="
             h-px
             w-6
+            shrink-0
             bg-zinc-700
             transition-colors
             duration-300
@@ -1390,6 +1550,9 @@ function Interest({
 
 /* ============================================================
    SELECTED WORK
+
+   Below xl the number and type sit on one row above the text;
+   from xl upwards they become columns of the four-column grid.
    ============================================================ */
 
 function Work({
@@ -1410,7 +1573,7 @@ function Work({
       className="
         group
         grid
-        gap-7
+        gap-5
         border
         border-white/[0.085]
         bg-[#171a20]
@@ -1419,32 +1582,35 @@ function Work({
         duration-300
         hover:border-blue-200/[0.15]
         hover:bg-[#1b1f26]
-        md:grid-cols-[70px_180px_minmax(0,1fr)_40px]
-        md:items-center
         md:p-8
+        xl:grid-cols-[70px_180px_minmax(0,1fr)_40px]
+        xl:items-center
+        xl:gap-7
       "
     >
 
-      {/* NUMBER */}
+      {/* NUMBER + TYPE */}
 
-      <NumberCircle>
-        {number}
-      </NumberCircle>
+      <div className="flex items-center gap-5 xl:contents">
+
+        <NumberCircle>
+          {number}
+        </NumberCircle>
 
 
-      {/* TYPE */}
+        <span
+          className="
+            font-mono
+            text-[9px]
+            uppercase
+            tracking-[0.18em]
+            text-blue-300/50
+          "
+        >
+          {type}
+        </span>
 
-      <span
-        className="
-          font-mono
-          text-[9px]
-          uppercase
-          tracking-[0.18em]
-          text-blue-300/50
-        "
-      >
-        {type}
-      </span>
+      </div>
 
 
       {/* CONTENT */}
@@ -1484,6 +1650,7 @@ function Work({
       {/* ARROW */}
 
       <span
+        aria-hidden="true"
         className="
           hidden
           font-serif
@@ -1492,7 +1659,7 @@ function Work({
           transition-colors
           duration-300
           group-hover:text-blue-300/60
-          md:block
+          xl:block
         "
       >
         →
@@ -1503,4 +1670,3 @@ function Work({
   )
 
 }
-

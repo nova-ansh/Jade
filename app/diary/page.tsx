@@ -254,6 +254,253 @@ function Tag({
    DIARY ENTRY
    ============================================================ */
 
+function downloadEntryAsA4(entry: DiaryEntry) {
+  const escapeHtml = (value: string) =>
+    value.replace(
+      /[&<>"']/g,
+      (character) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[character]!
+    )
+
+  const title = escapeHtml(entry.title)
+  const domain = escapeHtml(entry.domain)
+  const subject = escapeHtml(entry.subject)
+  const date = escapeHtml(entry.date)
+  const day = escapeHtml(entry.day)
+  const excerpt = escapeHtml(entry.excerpt)
+  const observation = escapeHtml(entry.observation)
+  const status = escapeHtml(entry.status)
+  const readingTime = escapeHtml(entry.readingTime)
+
+  const printWindow = window.open(
+    "",
+    "_blank",
+    "width=900,height=700"
+  )
+
+  if (!printWindow) {
+    alert("Please allow pop-ups to export this entry.")
+    return
+  }
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${title} — Jade's Diary</title>
+
+        <style>
+          @page {
+            size: A4;
+            margin: 22mm 24mm 24mm;
+          }
+
+          * {
+            box-sizing: border-box;
+          }
+
+          body {
+            margin: 0;
+            color: #202938;
+            background: #ffffff;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 11.5pt;
+            line-height: 1.8;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+
+          .page {
+            position: relative;
+            min-height: 250mm;
+          }
+
+          .watermark {
+            position: fixed;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-32deg);
+            color: rgba(35, 57, 85, 0.055);
+            font-family: Arial, sans-serif;
+            font-size: 48pt;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: -1;
+          }
+
+          .eyebrow {
+            color: #526c91;
+            font-family: Arial, sans-serif;
+            font-size: 8pt;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+          }
+
+          h1 {
+            margin: 18mm 0 7mm;
+            font-size: 29pt;
+            line-height: 1.2;
+            font-weight: 400;
+            letter-spacing: -0.035em;
+            overflow-wrap: anywhere;
+          }
+
+          .rule {
+            width: 100%;
+            height: 1px;
+            margin: 8mm 0;
+            background: #d9e0e8;
+          }
+
+          .metadata {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6mm 10mm;
+            margin: 8mm 0;
+          }
+
+          .label {
+            margin-bottom: 1.5mm;
+            color: #6b7280;
+            font-family: Arial, sans-serif;
+            font-size: 7.5pt;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+          }
+
+          .value {
+            font-size: 10.5pt;
+            overflow-wrap: anywhere;
+          }
+
+          .excerpt {
+            margin: 10mm 0;
+            color: #3d4a5d;
+            font-size: 13pt;
+            line-height: 1.8;
+          }
+
+          h2 {
+            margin: 10mm 0 3mm;
+            color: #344c6a;
+            font-family: Arial, sans-serif;
+            font-size: 8pt;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+          }
+
+          p {
+            margin: 0;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+          }
+
+          .footer {
+            margin-top: 18mm;
+            padding-top: 5mm;
+            border-top: 1px solid #d9e0e8;
+            display: flex;
+            justify-content: space-between;
+            gap: 8mm;
+            color: #6b7280;
+            font-family: Arial, sans-serif;
+            font-size: 8pt;
+          }
+
+          @media screen {
+            body {
+              max-width: 210mm;
+              margin: 20px auto;
+              padding: 22mm 24mm;
+              box-shadow: 0 2px 24px rgba(0, 0, 0, 0.12);
+            }
+          }
+        </style>
+      </head>
+
+      <body>
+        <div class="watermark">JADE · 1806</div>
+
+        <main class="page">
+          <div class="eyebrow">
+            Jade · Intellectual Diary
+          </div>
+
+          <h1>${title}</h1>
+
+          <div class="rule"></div>
+
+          <div class="metadata">
+            <div>
+              <div class="label">Domain</div>
+              <div class="value">${domain}</div>
+            </div>
+
+            <div>
+              <div class="label">Subject</div>
+              <div class="value">${subject}</div>
+            </div>
+
+            <div>
+              <div class="label">Date recorded</div>
+              <div class="value">${date}</div>
+            </div>
+
+            <div>
+              <div class="label">Day</div>
+              <div class="value">${day}</div>
+            </div>
+
+            <div>
+              <div class="label">Status</div>
+              <div class="value">${status}</div>
+            </div>
+
+            <div>
+              <div class="label">Reading time</div>
+              <div class="value">${readingTime}</div>
+            </div>
+          </div>
+
+          <div class="rule"></div>
+
+          <p class="excerpt">${excerpt}</p>
+
+          <h2>Present observation</h2>
+          <p>${observation}</p>
+
+          <footer class="footer">
+            <span>Jade · Author</span>
+            <span>Intellectual Diary · ${date}</span>
+          </footer>
+        </main>
+
+        <script>
+          window.onload = () => {
+            window.focus();
+            window.print();
+          };
+        </script>
+      </body>
+    </html>
+  `)
+
+  printWindow.document.close()
+}
+
+
 function DiaryEntryCard({
   entry,
   expanded,
@@ -375,17 +622,40 @@ function DiaryEntryCard({
               {entry.mark}
             </div>
 
-            <span
-              className="
-                font-mono
-                text-[9px]
-                uppercase
-                tracking-[0.18em]
-                text-zinc-600
-              "
-            >
-              {expanded ? "Close" : "Examine"}
-            </span>
+            
+<button
+  type="button"
+  className="
+    inline-flex
+    items-center
+    gap-2
+    rounded-md
+    border
+    border-blue-200/[0.12]
+    bg-[#111a2a]
+    px-4
+    py-2.5
+    font-mono
+    text-[12px]
+    uppercase
+    tracking-[0.18em]
+    text-blue-200
+    transition-all
+    duration-300
+    hover:border-blue-200/[0.25]
+    hover:bg-[#162238]
+    hover:text-white
+    focus-visible:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-blue-300/40
+  "
+>
+  {expanded ? "Close" : "Read"}
+  <span aria-hidden="true">
+    {expanded ? "−" : "↗"}
+  </span>
+</button>
+
 
           </div>
 
@@ -404,7 +674,42 @@ function DiaryEntryCard({
             border-white/[0.07]
             bg-[#14171c]
           "
+          
         >
+          
+<div className="flex justify-end border-b border-white/[0.07] px-7 py-4 md:px-9 lg:px-10">
+  <button
+    type="button"
+    onClick={() => downloadEntryAsA4(entry)}
+    className="
+      inline-flex
+      items-center
+      gap-3
+      border
+      border-blue-200/[0.12]
+      bg-[#111a2a]
+      px-4
+      py-3
+      font-mono
+      text-[12px]
+      uppercase
+      tracking-[0.16em]
+      text-blue-200
+      transition-all
+      duration-300
+      hover:border-blue-200/[0.25]
+      hover:bg-[#162238]
+      hover:text-white
+      focus-visible:outline-none
+      focus-visible:ring-2
+      focus-visible:ring-blue-300/40
+    "
+  >
+    <span aria-hidden="true">↓</span>
+    Download A4
+  </button>
+</div>
+
 
           <div
             className="
@@ -699,21 +1004,10 @@ export default function DiaryPage() {
               inset-0
               opacity-[0.035]
             "
-            style={{
-              backgroundImage:
-                `
-                linear-gradient(
-                  rgba(255,255,255,1) 1px,
-                  transparent 1px
-                ),
-                linear-gradient(
-                  90deg,
-                  rgba(255,255,255,1) 1px,
-                  transparent 1px
-                )
-                `,
-              backgroundSize: "48px 48px",
-            }}
+             style={{
+                backgroundImage: `None`,
+                backgroundSize: "48px 48px",
+              }}
           />
 
           <div
@@ -1104,13 +1398,13 @@ export default function DiaryPage() {
               </div>
 
               {/* ENTRIES WITH REAL GAPS */}
-
+              
               <div className="mt-7 space-y-5">
-
+                
                 {filteredEntries
                   .slice(1)
                   .map((entry) => (
-
+                    
                     <DiaryEntryCard
                       key={entry.number}
                       entry={entry}
@@ -1123,10 +1417,14 @@ export default function DiaryPage() {
                         )
                       }
                     />
+                    
 
                   ))}
 
+                  
+
               </div>
+              
 
             </section>
 
