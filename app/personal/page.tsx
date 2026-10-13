@@ -291,6 +291,53 @@ const gallery: GalleryItem[] = [
       ""
   },
 
+  {
+    id: 13,
+    title: "Saturnalia Festival at TIET, Patiala.",
+    date: "17 · XI · 1805",
+    day: "",
+    year: 1804,
+    month: 5,
+    image: "SAT-2025-1.jpeg",
+    description:
+      ""
+  },
+
+    {
+    id: 13,
+    title: "Saturnalia Festival at TIET, Patiala.",
+    date: "17 · XI · 1805",
+    day: "",
+    year: 1804,
+    month: 5,
+    image: "SAT-2025-2.jpeg",
+    description:
+      ""
+  },
+
+    {
+    id: 13,
+    title: "Saturnalia Festival at TIET, Patiala.",
+    date: "17 · XI · 1805",
+    day: "",
+    year: 1804,
+    month: 5,
+    image: "SAT-2025-3.jpeg",
+    description:
+      ""
+  },
+
+    {
+    id: 13,
+    title: "Saturnalia Festival at TIET, Patiala.",
+    date: "17 · XI · 1805",
+    day: "",
+    year: 1804,
+    month: 5,
+    image: "Band.jpeg",
+    description:
+      ""
+  },
 
   // {
   //   id: 3,
