@@ -82,7 +82,7 @@ const entries: DiaryEntry[] = [
     {
     number: "001",
     date: "14 · X · 2026",
-    day: "Thursday",
+    day: "Wednesday",
     title:
       "After Years, Are You the Same Person?",
     domain: "Personal",
@@ -94,6 +94,23 @@ const entries: DiaryEntry[] = [
     status: "Ongoing",
     readingTime: "05 min",
     mark: "∴",
+  },
+
+      {
+    number: "002",
+    date: "15 · X · 2026",
+    day: "Thursday",
+    title:
+      "If Reality is an interpolation of Logic, does it mean there are infinite Worlds?",
+    domain: "Mathematics",
+    subject: "Philosophical Argument",
+    excerpt:
+      "Will be updated on 25th Ocotober, 2026",
+    observation:
+      "",
+    status: "Ongoing",
+    readingTime: "10 min",
+    mark: "Z",
   },
 
   
