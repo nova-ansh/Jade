@@ -46,38 +46,54 @@ type DiaryEntry = {
    ============================================================ */
 
 const entries: DiaryEntry[] = [
-  {
-    number: "011",
-    date: "03 · IX · 1806",
+  // {
+  //   number: "011",
+  //   date: "03 · IX · 1806",
+  //   day: "Thursday",
+  //   title:
+  //     "What do I mean by India?",
+  //   domain: "Personal",
+  //   subject: "Philosophical Argument",
+  //   excerpt:
+  //     "Yet to be updated",
+  //   observation:
+  //     "Yet to be updated",
+  //   status: "Ongoing",
+  //   readingTime: "02 min",
+  //   mark: "∴",
+  // },
+
+  // {
+  //   number: "012",
+  //   date: "11 · IX · 1806",
+  //   day: "Friday",
+  //   title:
+  //     "Is Mathematics Created or Discovered?",
+  //   domain: "Mathematics",
+  //   subject: "Foundations of Mathematics",
+  //   excerpt:
+  //     "yet to be updated",
+  //   observation:
+  //     "yet to be updated",
+  //   status: "Ongoing",
+  //   readingTime: "02 min",
+  //   mark: "∞",
+  // },
+    {
+    number: "001",
+    date: "14 · X · 2026",
     day: "Thursday",
     title:
-      "What do I mean by India?",
+      "After Years, Are You the Same Person?",
     domain: "Personal",
     subject: "Philosophical Argument",
     excerpt:
-      "Yet to be updated",
+      "Will be updated on 24th Ocotober, 2026",
     observation:
-      "Yet to be updated",
+      "",
     status: "Ongoing",
-    readingTime: "02 min",
+    readingTime: "05 min",
     mark: "∴",
-  },
-
-  {
-    number: "012",
-    date: "11 · IX · 1806",
-    day: "Friday",
-    title:
-      "Is Mathematics Created or Discovered?",
-    domain: "Mathematics",
-    subject: "Foundations of Mathematics",
-    excerpt:
-      "yet to be updated",
-    observation:
-      "yet to be updated",
-    status: "Ongoing",
-    readingTime: "02 min",
-    mark: "∞",
   },
 
   
