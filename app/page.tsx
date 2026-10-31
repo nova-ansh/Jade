@@ -45,38 +45,44 @@ type Lecture = {
   date: string
   speaker: string
   topic: string
+  time: string
+  venue: string
   description?: string
   symbol: string
 }
 
 const lectures: Lecture[] = [
   {
-    week: "Week 43 · Day 01",
-    date: "2026-10-24",
+    week: "Week 44 · Talk - 01",
+    date: "2026-11-1",
     speaker: "Jade",
-    topic: "Asymptotic Analysis - Class 1",
+    topic: "Langauge Called \"C\"",
+    time: "14:00 - 15:30",
+    venue: "LH 10, Second Level, TSLAS, TIET-Patiala",
     description:
-      "Why algorithms are measured by growth rather than by seconds. The definitions of O, Ω and Θ built from first principles, with the quantifiers handled carefully, and the usual mistakes made when comparing functions.",
+      "This is ON-DEMAND Series. C is not just a programming langauge but the standalone Human Ideology in itself. We shall unravel the mystery of the name C and Algorithm - where do they actually come from. We will start from the formulation of programming construct until the rules themselves become inevitable.",
     symbol: "i",
   },
   {
-    week: "Week 43 · Day 02",
-    date: "2026-10-25",
+    week: "Week 44 · Talk - 02",
+    date: "2026-11-1",
     speaker: "Jade",
-    topic: "Asymptotic Analysis - Class 2",
+    topic: "Abstract Data Structures",
+    time: "16:00 - 18:00",
+    venue: "LH 10, Second Level, TSLAS, TIET-Patiala",
     description:
-      "Putting the definitions to work: the standard hierarchy of growth rates proved rather than recited, solving recurrences by substitution and recursion trees, and the Master theorem with its limits.",
+      "This lecture will uncover the mathematical formulation behind the data structures which are not mysterious intangible entities but the effort of Human Pattern Recognition.",
     symbol: "Δ",
   },
-  {
-    week: "Week 43 · Day 03",
-    date: "2026-10-26",
-    speaker: "Jade",
-    topic: "Operating Systems",
-    description:
-      "The operating system as a manager of shared resources: processes and threads, scheduling, synchronisation and deadlock, with the reasoning behind each design rather than a catalogue of definitions.",
-    symbol: "ε",
-  },
+  // {
+  //   week: "Week 43 · Day 03",
+  //   date: "2026-10-26",
+  //   speaker: "Jade",
+  //   topic: "Operating Systems",
+  //   description:
+  //     "The operating system as a manager of shared resources: processes and threads, scheduling, synchronisation and deadlock, with the reasoning behind each design rather than a catalogue of definitions.",
+  //   symbol: "ε",
+  // },
 ]
 
 
@@ -802,7 +808,7 @@ export default function Home() {
                 <SectionHeader
                   number="02"
                   title="Whiteboard Symposion"
-                  meta="Inspired by CMI, Chennai"
+                  meta="Inspired by Chennai Mathematical Institute, Chennai"
                 />
 
 
@@ -823,6 +829,8 @@ export default function Home() {
                       date={lecture.date}
                       speaker={lecture.speaker}
                       topic={lecture.topic}
+                      time={lecture.time}
+                      venue={lecture.venue}
                       description={lecture.description}
                       symbol={lecture.symbol}
                       today={today}
@@ -1153,6 +1161,8 @@ function SymposionDay({
   date,
   speaker,
   topic,
+  time,
+  venue,
   description,
   symbol,
   today,
@@ -1161,6 +1171,8 @@ function SymposionDay({
   date: string
   speaker: string
   topic: string
+  time: string
+  venue: string
   description?: string
   symbol: string
   today: string | null
@@ -1299,6 +1311,19 @@ function SymposionDay({
 
         </div>
 
+      </div>
+
+      {/* TIME + VENUE */}
+
+      <div className="relative mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div>
+          <Label>Time</Label>
+          <p className="mt-2 font-serif text-sm text-zinc-300">{time}</p>
+        </div>
+        <div>
+          <Label>Venue</Label>
+          <p className="mt-2 font-serif text-sm leading-6 text-zinc-300">{venue}</p>
+        </div>
       </div>
 
 
