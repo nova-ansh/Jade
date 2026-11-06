@@ -7,6 +7,9 @@ import {
 
 import { AppSidebar } from "@/components/app-sidebar"
 import { useEffect, useState } from "react"
+import { Bell, X } from "lucide-react"
+import { Menu } from "lucide-react"
+
 
 /* ============================================================
    JADE
@@ -52,28 +55,28 @@ type Lecture = {
 }
 
 const lectures: Lecture[] = [
-  {
-    week: "Week 44 · Talk - 01",
-    date: "2026-11-1",
-    speaker: "Jade",
-    topic: "Langauge Called \"C\"",
-    time: "14:00 - 15:30",
-    venue: "LH 10, Second Level, TSLAS, TIET-Patiala",
-    description:
-      "This is ON-DEMAND Series. C is not just a programming langauge but the standalone Human Ideology in itself. We shall unravel the mystery of the name C and Algorithm - where do they actually come from. We will start from the formulation of programming construct until the rules themselves become inevitable.",
-    symbol: "i",
-  },
-  {
-    week: "Week 44 · Talk - 02",
-    date: "2026-11-1",
-    speaker: "Jade",
-    topic: "Abstract Data Structures",
-    time: "16:00 - 18:00",
-    venue: "LH 10, Second Level, TSLAS, TIET-Patiala",
-    description:
-      "This lecture will uncover the mathematical formulation behind the data structures which are not mysterious intangible entities but the effort of Human Pattern Recognition.",
-    symbol: "Δ",
-  },
+//   {
+//   week: "",
+//   date: "COMING SOON",
+//   speaker: "",
+//   topic: "THEORY FEST @ TIET",
+//   time: "",
+//   venue: "TIET, Patiala",
+//   description:
+//     "Theory Fest at TIET is coming soon. A celebration of ideas, exploration, and the foundations of computing. Stay tuned for more details.",
+//   symbol: "i",
+// },
+  // {
+  //   week: "Week 44 · Talk - 02",
+  //   date: "2026-11-1",
+  //   speaker: "Jade",
+  //   topic: "Abstract Data Structures",
+  //   time: "16:00 - 18:00",
+  //   venue: "LH 10, Second Level, TSLAS, TIET-Patiala",
+  //   description:
+  //     "This lecture will uncover the mathematical formulation behind the data structures which are not mysterious intangible entities but the effort of Human Pattern Recognition.",
+  //   symbol: "Δ",
+  // },
   // {
   //   week: "Week 43 · Day 03",
   //   date: "2026-10-26",
@@ -85,6 +88,48 @@ const lectures: Lecture[] = [
   // },
 ]
 
+
+/* ============================================================
+   NOTIFICATION CENTRE
+
+   To disable notifications completely:
+   Set NOTIFICATIONS_ENABLED to false.
+
+   To remove an announcement, comment out or delete its object.
+   Give every announcement a unique ID. Change the ID whenever
+   you want a revised announcement to appear as new again.
+   ============================================================ */
+
+type Notification = {
+  id: string
+  date: string
+  title: string
+  message: string
+  category?: string
+}
+
+const NOTIFICATIONS_ENABLED = true
+
+const notifications: Notification[] = [
+  {
+    id: "theory-fest-2026",
+    date: "06 November 2026",
+    title: "Theory Fest is coming!",
+    category: "Announcement",
+    message:
+      "Theory Fest at TIET Patiala is coming soon. Further details will be announced shortly.",
+  },
+
+  // Add future announcements here.
+
+  // {
+  //   id: "announcement-002",
+  //   date: "10 November 2026",
+  //   title: "A new announcement",
+  //   category: "Symposion",
+  //   message: "Write your announcement here.",
+  // },
+]
 
 /* ============================================================
    DATE HELPERS
@@ -162,7 +207,47 @@ function toLocalISO(date: Date) {
    ============================================================ */
 
 export default function Home() {
+  const [notificationOpen, setNotificationOpen] = useState(false)
+const [readNotificationIds, setReadNotificationIds] = useState<string[]>([])
+const [readStateLoaded, setReadStateLoaded] = useState(false)
 
+// Load previously read notifications
+useEffect(() => {
+  const saved = localStorage.getItem("jade-read-notifications")
+
+  if (saved) {
+    try {
+      setReadNotificationIds(JSON.parse(saved))
+    } catch {
+      setReadNotificationIds([])
+    }
+  }
+
+  setReadStateLoaded(true)
+}, [])
+
+// Save read notifications
+useEffect(() => {
+  if (readStateLoaded) {
+    localStorage.setItem(
+      "jade-read-notifications",
+      JSON.stringify(readNotificationIds)
+    )
+  }
+}, [readNotificationIds, readStateLoaded])
+
+const unreadCount = notifications.filter(
+  (notification) => !readNotificationIds.includes(notification.id)
+).length
+
+const markAsRead = (id: string) => {
+  setReadNotificationIds((previous) =>
+    previous.includes(id) ? previous : [...previous, id]
+  )
+}
+
+
+//above is newly added for Notifications
   const [currentBoard, setCurrentBoard] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
@@ -262,36 +347,51 @@ export default function Home() {
               "
             >
 
-              {/* LEFT */}
+            {/* LEFT */}
 
-              <div className="flex items-center gap-3">
+<div className="flex items-center gap-3">
 
-                <div
-                  className="
-                    rounded-lg
-                    border
-                    border-blue-200/[0.10]
-                    bg-[#111a2a]
-                    transition-colors
-                    duration-300
-                    hover:border-blue-200/[0.20]
-                    hover:bg-[#162238]
-                  "
-                >
+  <div
+    className="
+      flex
+      items-center
+      gap-2
+      rounded-lg
+      border
+      border-blue-200/[0.10]
+      bg-[#111a2a]
+      px-2
+      transition-colors
+      duration-300
+      hover:border-blue-200/[0.20]
+      hover:bg-[#162238]
+    "
+  >
 
-                  <SidebarTrigger
-                    className="
-                      h-9
-                      w-9
-                      text-slate-400
-                      transition-colors
-                      hover:bg-blue-400/[0.08]
-                      hover:text-blue-200
-                    "
-                  />
+    <SidebarTrigger
+      className="
+        h-9
+        w-9
+        text-slate-400
+        transition-colors
+        hover:bg-blue-400/[0.08]
+        hover:text-blue-200
+      "
+    />
 
-                </div>
+    <span className="
+      pr-2
+      text-xs
+      font-medium
+      tracking-wide
+      text-slate-400
+      transition-colors
+      hover:text-blue-200
+    ">
+      Menu
+    </span>
 
+  </div>
 
                 <div className="hidden h-5 w-px bg-blue-200/[0.08] sm:block" />
 
@@ -384,6 +484,119 @@ export default function Home() {
                 >
                   φ
                 </span>
+                {NOTIFICATIONS_ENABLED && (
+  <div className="relative">
+    <button
+  onClick={() => setNotificationOpen(!notificationOpen)}
+  aria-label="Open notifications"
+  className="relative flex items-center gap-2
+    px-3 h-10 rounded-full
+    border border-red-500/30
+    bg-red-500/10 text-red-500
+    hover:bg-red-500 hover:text-white
+    transition-all duration-200"
+>
+  <Bell size={17} />
+
+  <span className="text-xs font-medium">
+    Notifications
+  </span>
+
+  {unreadCount > 0 && (
+    <span className="absolute -top-1.5 -right-1.5
+      flex items-center justify-center
+      min-w-[18px] h-[18px] px-1
+      rounded-full bg-red-600 text-white
+      text-[10px] font-bold">
+      {unreadCount}
+    </span>
+  )}
+</button>
+
+    {notificationOpen && (
+      <div className="absolute right-0 top-12 z-50
+        w-[min(360px,calc(100vw-2rem))]
+        rounded-xl border border-white/10
+        bg-[#111111] shadow-2xl overflow-hidden">
+
+        <div className="flex items-center justify-between
+          px-4 py-3 border-b border-white/10">
+
+          <div>
+            <h3 className="text-sm font-semibold text-white">
+              Notifications
+            </h3>
+            <p className="text-xs text-white/40 mt-1">
+              {unreadCount} unread
+            </p>
+          </div>
+
+          <button
+            onClick={() => setNotificationOpen(false)}
+            className="text-white/50 hover:text-white transition"
+            aria-label="Close notifications"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="max-h-[400px] overflow-y-auto">
+
+          {notifications.length === 0 ? (
+            <p className="p-6 text-center text-sm text-white/40">
+              No announcements yet.
+            </p>
+          ) : (
+            notifications.map((notification) => {
+              const isRead = readNotificationIds.includes(notification.id)
+
+              return (
+                <button
+                  key={notification.id}
+                  onClick={() => markAsRead(notification.id)}
+                  className={`w-full text-left p-4 border-b
+                    border-white/5 transition
+                    hover:bg-white/5
+                    ${isRead ? "opacity-50" : "opacity-100"}`}
+                >
+                  <div className="flex items-start gap-3">
+
+                    <span className={`mt-1.5 w-2 h-2 rounded-full
+                      shrink-0 ${isRead ? "bg-white/20" : "bg-red-500"}`}
+                    />
+
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] uppercase
+                          tracking-wider text-red-400">
+                          {notification.category || "Announcement"}
+                        </span>
+                      </div>
+
+                      <h4 className="text-sm font-semibold text-white">
+                        {notification.title}
+                      </h4>
+
+                      <p className="text-xs leading-relaxed
+                        text-white/60 mt-1">
+                        {notification.message}
+                      </p>
+
+                      <p className="text-[10px] text-white/30 mt-2">
+                        {notification.date}
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              )
+            })
+          )}
+
+        </div>
+      </div>
+    )}
+  </div>
+)}
 
               </div>
 
@@ -545,9 +758,7 @@ export default function Home() {
               md:text-[27px]
             "
           >
-            Analysis &amp; Natural Philosophy owe their most
-            important discoveries to this fruitful means,
-            which is called Induction.
+            Sanity and happiness are an impossible combination.
           </p>
 
           <footer
@@ -559,8 +770,7 @@ export default function Home() {
               text-zinc-500
             "
           >
-            — Pierre-Simon Laplace, A Philosophical Essay
-            on Probabilities (1814)
+            — Mark Twain (Samuel Langhorne Clemens - American writer, humorist, and essayist)
           </footer>
         </blockquote>
       </div>
@@ -820,23 +1030,36 @@ export default function Home() {
                     grid-cols-[repeat(auto-fit,minmax(280px,1fr))]
                   "
                 >
+    {SYMPOSION_STATUS.active ? (
+                    lectures.map((lecture, index) => (
+                      <SymposionDay
+                        key={lecture.topic}
+                        {...lecture}
+                        symbol={String(index + 1).padStart(2, "0")}
+                        today={today}
+                      />
+                    ))
+                  ) : (
 
-                  {lectures.map((lecture) => (
+                    <div className="border border-white/[0.085] bg-[#171a20] p-8 md:p-12">
 
-                    <SymposionDay
-                      key={lecture.date}
-                      week={lecture.week}
-                      date={lecture.date}
-                      speaker={lecture.speaker}
-                      topic={lecture.topic}
-                      time={lecture.time}
-                      venue={lecture.venue}
-                      description={lecture.description}
-                      symbol={lecture.symbol}
-                      today={today}
-                    />
+                      <span className="font-mono text-[9px] uppercase
+                        tracking-[0.30em] text-red-600/90">
+                        Symposion · Announcement
+                      </span>
 
-                  ))}
+                      <h3 className="mt-6 font-serif text-2xl text-white">
+                        Lectures are temporarily postponed.
+                      </h3>
+
+                      <p className="mt-4 max-w-xl font-serif text-sm
+                        leading-7 text-zinc-400">
+                        {SYMPOSION_STATUS.message}
+                      </p>
+
+                    </div>
+
+)}
 
                 </div>
 
@@ -1155,6 +1378,11 @@ function SectionHeader({
 /* ============================================================
    SYMPOSION DAY
    ============================================================ */
+   const SYMPOSION_STATUS = {
+  active: false,
+  message:
+    "Symposion lectures are postponed until further discussion.",
+}
 
 function SymposionDay({
   week,
